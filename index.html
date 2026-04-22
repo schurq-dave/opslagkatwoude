@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="utf-8">
-  <title>Opslag Katwoude — Gewoon een container. Gewoon opslag.</title>
+  <title>Opslag Katwoude — Opslag nodig?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="colors_and_type.css">
   <link rel="icon" href="assets/mark.svg">
@@ -419,15 +419,14 @@ function Hero() {
             lineHeight: 1.02, letterSpacing: '-0.03em', fontWeight: 700,
             color: 'var(--room-50)', margin: '0 0 28px',
           }}>
-            Gewoon een<br/>
-            container voor <Highlight>opslag.</Highlight>
+            <Highlight>Opslag</Highlight> nodig?
           </h1>
 
           <p className="ok-hero-lede" style={{
             fontSize: 18, lineHeight: 1.6, color: 'var(--room-200)',
             maxWidth: 460, margin: '0 0 36px',
           }}>
-            24 m². €175 per maand. Vandaag geregeld. Naast Hotel Katwoude, tussen de weilanden.
+            24 m². €175 per maand. Vandaag geregeld. In Katwoude, naast de N247, tussen de weilanden.
           </p>
 
           <div className="ok-hero-cta-row" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 56 }}>
@@ -467,7 +466,7 @@ function StatMini({ k, v }) {
 function Propositie() {
   const variant = useTweak('propositieVariant') || 'A';
   const items = [
-    { icon: 'mapPin', k: 'Dichtbij',   v: 'Naast Hotel Katwoude. Binnen 7 km van Volendam, Edam, Monnickendam, Purmerend.' },
+    { icon: 'mapPin', k: 'Dichtbij',   v: 'In Katwoude, naast de N247. Binnen 7 km van Volendam, Edam, Monnickendam en Purmerend.' },
     { icon: 'euro',   k: 'Voordelig',  v: '€175 per maand, alles inbegrepen. Scherpste prijs in de regio.' },
     { icon: 'clock',  k: 'Direct',     v: '24/7 online te regelen. Geen wachttijd, geen verkoopgesprek.' },
     { icon: 'shield', k: 'Degelijk',   v: '400+ zeecontainers, afgesloten terrein, duidelijke voorwaarden.' },
@@ -660,7 +659,7 @@ function ContainerA() {
         <div>
           <Eyebrow>Eén formaat. Eén prijs.</Eyebrow>
           <DisplayH2 size={52}>
-            24 m². Genoeg voor een woning, voorraad, of een <Highlight>busje spullen.</Highlight>
+            24 m². Extra opslag voor een huis, voorraad of een <Highlight>busje spullen.</Highlight>
           </DisplayH2>
           <p style={{ fontSize: 17, color: 'var(--fg-muted)', marginBottom: 28, maxWidth: 480, lineHeight: 1.6 }}>
             Eén maat zeecontainer: 10 meter bij 2,4 meter. Schoon, droog, afgesloten. Je krijgt je eigen slot. Je komt wanneer je wil.
@@ -702,7 +701,7 @@ function ContainerA() {
             <Row l="Afmetingen" r="10 × 2,4 m" />
             <Row l="Opzegtermijn" r="Geen" />
             <Row l="Borg" r="€0" />
-            <Row l="Aansluiting" r="Geen stroom" />
+            <Row l="Aansluiting" r="Stroomaansluiting op het terrein" />
           </div>
           <PillCTA>Reserveer deze container</PillCTA>
         </div>
@@ -718,7 +717,7 @@ function ContainerB() {
       <div style={{ maxWidth: 720, margin: '0 auto 48px', textAlign: 'center' }}>
         <Eyebrow>Eén formaat. Eén prijs.</Eyebrow>
         <DisplayH2 size={48}>
-          24 m². Genoeg voor een <Highlight>busje spullen.</Highlight>
+          24 m². Extra opslag voor een huis, voorraad of een <Highlight>busje spullen.</Highlight>
         </DisplayH2>
       </div>
 
@@ -969,10 +968,19 @@ function Werkwijze() {
    -------------------------------------------------------------------- */
 function Faq() {
   const items = [
-  ['Hoe snel kan ik een container krijgen?', 'Meestal dezelfde dag. Reserveer voor 16:00, en je kunt vandaag nog bij je container.'],
-  ['Is er stroom?', 'Nee. Onze containers zijn puur opslag — geen stopcontacten, geen verlichting binnen.'],
-  ['Mag ik mijn bedrijfsvoorraad er opslaan?', 'Ja. Veel zzp\'ers en ondernemers uit de regio gebruiken ons voor voorraad, materialen en archief.'],
-  ['Wat als ik er na een maand weer vanaf wil?', 'Dan zeg je op. Geen opzegtermijn, geen gedoe.']];
+    { q: 'Hoe snel kan ik een container krijgen?', a: 'Meestal dezelfde dag. Reserveer voor 16:00, en je kunt vandaag nog bij je container.' },
+    { q: 'Is er stroom?', a: 'Ja. Op het terrein is stroomaansluiting beschikbaar.' },
+    { q: 'Mag ik mijn bedrijfsvoorraad er opslaan?', a: 'Ja. Veel zzp\'ers en ondernemers uit de regio gebruiken ons voor voorraad, materialen en archief.' },
+    {
+      q: 'Wat als ik er na een maand weer vanaf wil?',
+      a: (
+        <>
+          Dan zeg je op. Geen opzegtermijn, geen gedoe. Voor alle voorwaarden — onder meer rond opzeggen — gelden onze{' '}
+          <a href="#algemene-voorwaarden" style={{ color: 'var(--ink-800)', textDecoration: 'underline', textUnderlineOffset: 3 }}>algemene voorwaarden</a> die op je huur van toepassing zijn.
+        </>
+      ),
+    },
+  ];
 
   const [openIndex, setOpenIndex] = React.useState(0);
 
@@ -989,13 +997,13 @@ function Faq() {
               </p>
             </div>
             <div style={{ display: 'grid', gap: 0 }}>
-              {items.map(([q, a], i) => (
-                <FaqItem 
-                  key={q} 
-                  q={q} 
-                  a={a} 
-                  isOpen={openIndex === i} 
-                  onToggle={() => setOpenIndex(openIndex === i ? -1 : i)} 
+              {items.map((item, i) => (
+                <FaqItem
+                  key={item.q}
+                  q={item.q}
+                  a={item.a}
+                  isOpen={openIndex === i}
+                  onToggle={() => setOpenIndex(openIndex === i ? -1 : i)}
                 />
               ))}
             </div>
@@ -1040,10 +1048,10 @@ function Locatie() {
           <div style={{ textAlign: 'center', marginBottom: 48, maxWidth: 640, margin: '0 auto 48px' }}>
             <Eyebrow>Locatie</Eyebrow>
             <DisplayH2 size={52}>
-              Tussen de weilanden, aan het <Highlight>Markermeer.</Highlight>
+              Om de hoek, <Highlight>wanneer je maar wilt</Highlight>.
             </DisplayH2>
             <p className="lead" style={{ maxWidth: 560, margin: '0 auto' }}>
-              Lagedijk 9, 1145 PL Katwoude. Naast Hotel Katwoude, tussen Volendam en Monnickendam.
+              Lagedijk 9, 1145 PL Katwoude. In Katwoude, naast de N247, tussen Volendam en Monnickendam.
             </p>
           </div>
           <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--room-100)' }}>
@@ -1228,7 +1236,7 @@ function Footer() {
       color: 'var(--oker-600)', marginBottom: 14
     }}>{title}</div>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8 }}>
-            {links.map((l) => <li key={l}><a href="#" style={{ color: 'var(--room-200)', fontSize: 14, textDecoration: 'none' }}>{l}</a></li>)}
+            {links.map((l) => <li key={l}><a href="#" id={l === 'Algemene voorwaarden' ? 'algemene-voorwaarden' : undefined} style={{ color: 'var(--room-200)', fontSize: 14, textDecoration: 'none' }}>{l}</a></li>)}
           </ul>
         </div>;
 
@@ -1239,7 +1247,7 @@ function Footer() {
               <div>
                 <img src={LOGO_I} alt="Opslag Katwoude" style={{ height: 72, marginBottom: 20 }} />
                 <p style={{ fontSize: 15, lineHeight: 1.65, color: 'var(--room-200)', maxWidth: 320, margin: 0 }}>
-                  Opslag naast Hotel Katwoude. Tussen de weilanden. 24 m². €175 per maand.
+                  Opslag in Katwoude, naast de N247. Tussen de weilanden. 24 m². €175 per maand.
                 </p>
               </div>
               {col('Handige links', ['Home', 'Werkwijze', 'Over ons', 'Contact', 'Blog'])}
@@ -1334,7 +1342,7 @@ function SocialProof() {
       <div style={{ maxWidth: 720, margin: '0 auto 56px', textAlign: 'center' }}>
         <Eyebrow>Wat huurders zeggen</Eyebrow>
         <DisplayH2 size={44}>
-          400+ containers verhuurd. Niemand <Highlight>klaagt.</Highlight>
+          Doet wat het moet doen. <Highlight>Zonder klachten</Highlight>.
         </DisplayH2>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 12 }}>
           <Stars value={4.8} />

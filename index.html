@@ -1068,7 +1068,7 @@ function LocItem({ k, v }) {
 }
 
 /* Echte kaart — Leaflet met OSM tiles, gecentreerd op Lagedijk 9 Katwoude.
-   Coordinaten 52.4598°N, 5.0618°E. De pin is een echte Leaflet marker, dus
+   Coordinaten 52.4698°N, 5.0267°E. De pin is een echte Leaflet marker, dus
    blijft op locatie ook bij zoomen/pannen. */
 function KatwoudeMap() {
   const ref = React.useRef(null);
@@ -1079,8 +1079,8 @@ function KatwoudeMap() {
     if (typeof window.L === 'undefined') return;
 
     const L = window.L;
-    const lat = 52.4598;
-    const lon = 5.0618;
+    const lat = 52.4698;
+    const lon = 5.0267;
 
     const map = L.map(ref.current, {
       center: [lat, lon],
@@ -1149,7 +1149,7 @@ function KatwoudeMap() {
 
       {/* Open in maps cta rechtsonder */}
       <a
-        href="https://www.openstreetmap.org/?mlat=52.4598&mlon=5.0618#map=16/52.4598/5.0618"
+        href="https://www.openstreetmap.org/?mlat=52.4698&mlon=5.0267#map=16/52.4698/5.0267"
         target="_blank" rel="noreferrer"
         style={{
           position: 'absolute', bottom: 16, right: 16, zIndex: 500,

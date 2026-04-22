@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Laag_1" data-name="Laag 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 80">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #2e3f2a;
+      }
+
+      .cls-3 {
+        fill: #c9a961;
+      }
+
+      .cls-4 {
+        fill: #1f1c18;
+      }
+
+      .cls-4, .cls-5, .cls-2 {
+        isolation: isolate;
+      }
+
+      .cls-4, .cls-2 {
+        font-family: DMSans-SemiBold, 'DM Sans';
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .cls-4, .cls-6 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-7 {
+        stroke: #2e3f2a;
+        stroke-linecap: square;
+        stroke-width: 1.5px;
+      }
+
+      .cls-7, .cls-5 {
+        fill: none;
+      }
+
+      .cls-5 {
+        opacity: .5;
+        stroke: #c9a961;
+        stroke-width: .6px;
+      }
+
+      .cls-8 {
+        letter-spacing: -.05em;
+      }
+
+      .cls-9 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-10 {
+        letter-spacing: -.03em;
+      }
+    </style>
+  </defs>
+  <text class="cls-4" transform="translate(8 40)"><tspan x="0" y="0">Opslag</tspan></text>
+  <text class="cls-2" transform="translate(8 62)"><tspan class="cls-8" x="0" y="0">K</tspan><tspan class="cls-10" x="13.94" y="0">a</tspan><tspan class="cls-6" x="27.05" y="0">t</tspan><tspan class="cls-9" x="36.67" y="0">w</tspan><tspan class="cls-6" x="55.03" y="0">oude</tspan></text>
+  <g>
+    <line class="cls-7" x1="125.65" y1="61.26" x2="203.49" y2="61.26"/>
+    <rect class="cls-1" x="134.3" y="35.32" width="60.54" height="25.95"/>
+    <line class="cls-5" x1="145.83" y1="38.2" x2="145.83" y2="58.38"/>
+    <line class="cls-5" x1="154.48" y1="38.2" x2="154.48" y2="58.38"/>
+    <line class="cls-5" x1="164.57" y1="38.2" x2="164.57" y2="58.38"/>
+    <line class="cls-5" x1="174.66" y1="38.2" x2="174.66" y2="58.38"/>
+    <line class="cls-5" x1="184.75" y1="38.2" x2="184.75" y2="58.38"/>
+    <circle class="cls-3" cx="140.07" cy="23.78" r="5.04"/>
+  </g>
+</svg>

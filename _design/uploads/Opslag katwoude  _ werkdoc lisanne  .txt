@@ -1,0 +1,104 @@
+﻿Aradon briefing
+Opslag katwoude opdracht  
+Wat er op de website moet gebeuren
+De website is het verhuurplatform waar de volledige huurflow digitaal verloopt. Bezoekers moeten:
+1. Oriënteren — zien wat Opslag Katwoude is, hoe het werkt en wat het kost (€175/maand voor 24 m²)
+2. Online een opslagruimte boeken — via een reserveringsflow met 30 minuten timer
+3. Digitaal contract tekenen via DocuSeal
+4. Betalen via Mollie (iDEAL eerste betaling + SEPA machtiging voor maandelijkse incasso)
+5. Automatisch onboarden — bevestigingen, herinneringen en toegang via e-mailautomatisering
+Pagina's: Home, Werkwijze, Contact, Blog (overzicht + detail), SEO-pagina's, 404/Privacy/Voorwaarden. Plus een admin dashboard aan de achterkant voor beheer.
+Wat het moet uitstralen
+Aansluitend op de strategie (dichtbij, gemak, goedkoopste) en de doelgroep (particulieren + ZZP'ers/ondernemers in een straal van 7 km):
+* Lokaal en nuchter — Katwoude/Volendam-gevoel, geen corporate storage-keten
+* Simpel en gemakkelijk — in een paar kliks geregeld, geen gedoe
+* Betrouwbaar — veilige opslag, duidelijke voorwaarden, transparante prijs
+* Voordelig — scherpste prijs in de regio zonder goedkoop over te komen
+* Direct beschikbaar — 24/7 online te regelen, geen wachttijden of verkoopgesprekken
+Kort samengevat: een strakke, no-nonsense lokale verhuursite waar iemand binnen enkele minuten van "ik zoek opslag" naar "ik heb een container geboekt" gaat.
+Qua design is het belangrijk dat het er niet al te high-end uitziet. 
+
+
+associaties + keuzes
+associaties + keuzes 
+
+
+De context: platteland bij Katwoude
+Katwoude is geen industrieterrein of bedrijvenpark. Het is open polderland aan de rand van het Markermeer, met weilanden, koeien, sloten, lage horizon en een grote lucht. De locatie is letterlijk bij Hotel Katwoude, tussen Volendam en Monnickendam, omringd door weilanden. Dat is geen toeval — dat is je meest onderscheidende troef. Geen enkele grote storage-keten heeft dit. Shurgard en City Box staan op bedrijventerreinen langs de snelweg. Jij staat tussen de koeien.
+Dat verandert alles aan de branding. Het merk moet niet "stoer industrieel" zijn — dat zou botsen met de omgeving en je troef weggooien. Het merk moet de rust, ruimte en eerlijkheid van het platteland overbrengen.
+Welke associaties willen we oproepen?
+Ik zie vier kernassociaties die samen het merk moeten dragen. Ze komen voort uit drie dingen: wie de doelgroep is (regionale particulieren en ondernemers), wat ze zoeken op dat moment (zekerheid in een rommelige periode), en wat de locatie uniek maakt (platteland, ruimte, lokaal).
+1. Ruimte en rust 
+De doelgroep komt bij je terecht omdat ze thuis of op het werk te weinig ruimte hebben. Je merk moet letterlijk en figuurlijk ruimte ademen. Geen drukte, geen uitroeptekens, geen "NU BOEKEN!!". Stilte werkt hier harder dan lawaai. De openheid van het landschap is je metafoor.
+2. Nuchter en eerlijk
+ Noord-Hollands boerenland staat voor "geen poespas, doen wat je zegt". Geen verkooppraatjes, geen kleine lettertjes, geen corporate taal. €175 is €175. Vandaag geboekt is vandaag erin. Deze associatie bouwt vertrouwen op een manier die de grote ketens nooit kunnen nabootsen.
+3. Lokaal en verankerd
+ Je bent van hier. Je kent Volendam, Edam, Monnickendam, Purmerend. Dat is waarde in een regio waar "lokaal" echt iets betekent. Je concurreert niet met Shurgard op prijs of technologie — je concurreert op nabijheid en bekendheid. Je merk moet voelen als de lokale aannemer of garage: die ken je, die vertrouw je, die blijft.
+4. Degelijk en betrouwbaar 
+Mensen slaan hun spullen bij je op — vaak met emotionele waarde (verhuizing na scheiding, erfenis, bedrijfsvoorraad). Degelijkheid is niet optioneel. Maar degelijkheid hoeft niet "industrieel grijs" te zijn. Een goed onderhouden boerenschuur is ook degelijk. Een eikenhouten hek ook. Kies voor degelijkheid die past bij het landschap.
+Wat je niet moet zijn: trendy, speels, hightech, urban, corporate, of "hip". Die associaties botsen met zowel de locatie als de reden waarom mensen bij je komen.
+
+
+kleur
+De associaties leiden naar een palet dat je het beste kunt omschrijven als "polder bij laag licht" — aardse tinten, natuurlijke contrasten, geen felle of kunstmatige kleuren.
+Primair — Diepgroen (weiland/mos) Bijvoorbeeld #2E3F2A of #364A32. Dit is niet het "duurzame groen" van eco-merken, maar het donkere groen van een weiland in de avond. Het roept rust, natuur en stabiliteit op, en het is zeldzaam in de storage-markt (die vol zit met oranje, rood, geel en blauw). Dit wordt je hoofdkleur — voor headers, logo, grote vlakken.
+Anker — Zacht zwart/donkerbruin #1F1C18 — geen hard zwart, maar de kleur van natte aarde of oud hout. Voor tekst en contrastelementen. Geeft degelijkheid zonder koudheid.
+Accent — Gerijpt oker of koolzaadgeel #C9A961 of #D4B868. Een gedempte, natuurlijke geel-tint die doet denken aan stro, koolzaadvelden in het voorjaar, of laagstaand zonlicht. Dit is je "actiekleur" voor knoppen en belangrijke elementen. Belangrijk: gedempt, niet fel. Felle geel hoort op een bouwplaats, niet in de polder.
+Basis — Warme room/zandsteen #F2ECE0 — je achtergrond. Geen kil wit, maar de kleur van ongebleekt linnen of kalksteen. Dit alleen al maakt je site rustiger en warmer dan 90% van de concurrenten.
+Optioneel ondersteunend — Waterblauw gedempt #5A6F78 — als derde kleur voor subtiele accenten (iconen, lijnen). Verwijzing naar het Markermeer en de sloten, zonder dominant te zijn.
+Dit palet werkt omdat elke kleur uit de omgeving komt. Je merk voelt alsof het hoort waar het staat. Dat is de sterkste vorm van branding die er is: congruentie tussen plek en uitstraling
+Typografie
+Volgens dezelfde logica: niet industrieel, niet corporate, niet trendy. Je zoekt letters die rust en degelijkheid uitstralen.
+Headings — een sans-serif met een lichte humanistische inslag Denk aan GT America, Söhne Breit, of gratis: Work Sans of Manrope. Deze letters voelen gemaakt door mensen, niet door machines. Vermijd geometrische display fonts (te modern) en condensed fonts (te urban).
+Alternatief voor karakter: overweeg voor headings een moderne serif zoals Fraunces of Source Serif. Een serif zou hier onverwacht goed werken — het geeft het merk een ambachtelijk, verankerd gevoel, alsof het er al tien jaar staat. Dit onderscheidt je scherp van elke concurrent, die allemaal voor sans-serif gaan. Risico: iets meer "chique" gevoel. Test dit.
+Body — rustige, leesbare sans-serif Inter, IBM Plex Sans of Söhne Buch. Minimaal 17px, ruime regelafstand (1.65). Je doelgroep loopt tot 67 jaar — leesbaarheid is belangrijker dan stijl.
+Wat je niet moet doen: Montserrat, Poppins, Bebas Neue, of geometrische caps. Die horen bij een andere wereld.
+
+
+Taal en tone of voice
+Nuchter, stil, feitelijk. De taal van iemand die niets te verbergen heeft en geen moeite doet om je te overtuigen — precies daardoor overtuigt het.
+Wel:
+* "24 m². €175 per maand. Vandaag geregeld."
+* "Gewoon een container. Gewoon opslag."
+* "Naast Hotel Katwoude. Tussen de weilanden."
+* "Geen contracten op papier. Geen gedoe."
+Niet:
+* "Dé opslagoplossing van de regio!"
+* "Uw persoonlijke opslagspecialist"
+* "Veilig, betrouwbaar én flexibel"
+Let op de korte zinnen met puntjes ertussen. Dat ritme is de uitvoering van "ruimte" in taal. Elk woord krijgt lucht.
+Beeld
+Dit is waar je merk wint of verliest. De locatie is je goud — gebruik hem.
+Wat je moet laten fotograferen:
+* Het terrein bij vroege ochtend of gouden uur, met lage zon en lange schaduwen over de containers
+* Brede landschapsfoto's waarin de containers klein in het weidse Waterland-landschap staan. Laat de horizon zien. Laat de lucht zien.
+* Mist in de ochtend boven de weilanden met de containers net zichtbaar — dit soort beelden zijn memorabel
+* Koeien in het weiland naast het terrein (als dat kan) — dat is eerlijkheid in één beeld
+* Detailfoto's van textuur: rijp op een containerdeur, regendruppels op staal, een hand op een slot
+* Een drone-shot die de schaal laat zien zonder dat het industrieel wordt — vanaf grotere hoogte wordt het terrein onderdeel van het landschap
+Wat je moet vermijden:
+* Witte studio-shots van dozen
+* Mensen met duim omhoog of glimlachende families
+* Stock van binnenkanten van opslagunits
+* Harde middagzon met hoge contrasten
+* Alles wat er "commercieel" uitziet
+Visuele stijl: natuurlijke kleuren, zachte contrasten, veel lucht in de compositie. Denk aan hoe Belcampo, Graanrepubliek of De Nieuwe Winkel hun omgeving fotograferen — ambachtelijk, aards, rustig.
+
+
+Website
+Website 
+
+
+websites ter inspiratie: 
+
+
+https://preview.themeforest.net/item/fastgo-logistics-cargo-transportation-elementor-template-kit/full_screen_preview/58291201
+
+
+https://preview.themeforest.net/item/stormov-moving-storage-service-elementor-template-kit/full_screen_preview/60609394
+
+
+https://preview.themeforest.net/item/boxbox-storage-service-company-elementor-template-kits/full_screen_preview/60993896
+
+
+https://preview.themeforest.net/item/logcargo-logistic-cargo-transportation-elementor-template-kit/full_screen_preview/55861959

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--room-100); font-family: var(--font-sans); color: var(--ink-900); }
+  h4 { margin: 0 0 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-500); font-weight: 600;}
+  .grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; align-items: start; }
+
+  .phone, .desk {
+    background: var(--room-50);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .desk .stage, .phone .stage {
+    background: var(--green-800);
+    color: var(--room-50);
+    padding: 28px 24px;
+  }
+
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--oker-500); margin-bottom: 10px;}
+  h1 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; margin: 0 0 12px; color: var(--room-50);}
+  p.lede { margin: 0; line-height: 1.55; color: var(--room-200); }
+
+  .hl { display: inline-block; background: var(--oker-500); color: var(--ink-900); padding: 0 8px; transform: skew(-2deg);}
+  .hl > span { display: inline-block; transform: skew(2deg);}
+
+  /* Desktop proportion */
+  .desk h1 { font-size: 48px; line-height: 1.04; max-width: 460px;}
+  .desk p.lede { font-size: 15px; max-width: 360px; }
+
+  /* Mobile proportion */
+  .phone { max-width: 340px; margin: 0 auto; }
+  .phone h1 { font-size: 38px; line-height: 1.05;}
+  .phone p.lede { font-size: 15px; }
+
+  .table { background: var(--room-50); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-top: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-700);}
+  .table .r { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; padding: 6px 0; border-bottom: 1px dashed var(--border);}
+  .table .r:last-child { border-bottom: 0;}
+  .table .hd { color: var(--ink-500); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;}
+  .cap { margin-top: 16px; font-size: 12px; color: var(--ink-500); font-family: var(--font-mono);}
+</style>
+</head>
+<body>
+  <h4>Hero-vergelijk · desktop ↔ mobiel</h4>
+  <div class="grid">
+    <div class="desk">
+      <div class="stage">
+        <div class="eyebrow">Katwoude · Lagedijk 9</div>
+        <h1>Gewoon een container voor <span class="hl"><span>opslag.</span></span></h1>
+        <p class="lede">24 m². €175 per maand. Vandaag geregeld. Naast Hotel Katwoude, tussen de weilanden.</p>
+      </div>
+    </div>
+    <div class="phone">
+      <div class="stage">
+        <div class="eyebrow">Katwoude · Lagedijk 9</div>
+        <h1>Gewoon een container voor <span class="hl"><span>opslag.</span></span></h1>
+        <p class="lede">24 m². €175 per maand. Vandaag geregeld.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="table">
+    <div class="r hd"><span>Element</span><span>Desktop</span><span>Mobiel ≤ 768px</span></div>
+    <div class="r"><span>Hero H1</span><span>clamp(48, 5.5vw, 84)</span><span>clamp(38, 9.5vw, 52)</span></div>
+    <div class="r"><span>Sectie H2</span><span>48–56</span><span>clamp(28, 6.5vw, 38)</span></div>
+    <div class="r"><span>H3 / card titles</span><span>22–26</span><span>18</span></div>
+    <div class="r"><span>Hero lede</span><span>18 / 29</span><span>15 / 22</span></div>
+    <div class="r"><span>Grids 3–4 kol</span><span>repeat(N, 1fr)</span><span>1fr (stacked)</span></div>
+    <div class="r"><span>Sectie padding</span><span>96–120</span><span>56–72</span></div>
+  </div>
+
+  <div class="cap">Breakpoint: 768px · alles daaronder gebruikt mobiele schaal</div>
+</body>
+</html>

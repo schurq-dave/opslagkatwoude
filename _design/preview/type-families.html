@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--room-100); color: var(--ink-900); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tile { background: var(--room-50); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  h4 { margin: 0 0 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-500); font-weight: 600; font-family: var(--font-sans);}
+  .sample-display { font-family: var(--font-display); font-weight: 700; font-size: 26px; color: var(--ink-900); margin: 0 0 6px; letter-spacing: -0.02em; line-height: 1.1; }
+  .sample-body    { font-family: var(--font-sans); font-weight: 500; font-size: 18px; color: var(--ink-900); margin: 0 0 6px; }
+  .meta { font-family: var(--font-mono); font-size: 11px; color: var(--ink-500); line-height: 1.5;}
+  .note { font-family: var(--font-sans); font-size: 11px; color: #6B5835; background: #F5ECD4; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-top: 10px;}
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="tile">
+      <h4>Display — DM Sans</h4>
+      <p class="sample-display">Gewoon een container</p>
+      <p class="sample-display" style="font-size: 18px;">€175 · 24 m²</p>
+      <div class="meta">700 · tracking -0.025em<br>Koppen, hero, eyebrows highlights</div>
+      <div class="note">Google Font — productie-proxy voor merk-display</div>
+    </div>
+    <div class="tile">
+      <h4>Body — Work Sans</h4>
+      <p class="sample-body">Tussen de weilanden, naast Hotel Katwoude.</p>
+      <p class="sample-body" style="font-size: 15px; font-weight: 400;">24/7 toegang · geen opzegtermijn</p>
+      <div class="meta">400 / 500 / 600 · tracking 0<br>Body, UI, labels, knoppen</div>
+      <div class="note">Google Font — productie-proxy voor merk-body</div>
+    </div>
+  </div>
+</body>
+</html>

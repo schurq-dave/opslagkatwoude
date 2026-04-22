@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--room-100); font-family: var(--font-sans); }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+  .row:last-child { margin-bottom: 0; }
+  .label { font-size: 11px; color: var(--ink-500); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; width: 90px; }
+  .badge { font-size: 12px; padding: 4px 10px; border-radius: 999px; font-weight: 500; }
+  .b-neutral { background: var(--room-200); color: var(--ink-700); }
+  .b-success { background: #E4E9DF; color: #2E3F2A; }
+  .b-warn    { background: #F5ECD4; color: #8A7137; }
+  .b-danger  { background: #F2E1DD; color: #8B3A2E; }
+  .b-accent  { background: #C9A961; color: #1F1C18; }
+  .b-solid   { background: #2E3F2A; color: #F8F4EB; }
+  .tag { font-size: 12px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px; color: var(--ink-700); background: var(--room-50); }
+</style>
+</head>
+<body>
+  <div class="row"><span class="label">Status</span>
+    <span class="badge b-success">Beschikbaar</span>
+    <span class="badge b-warn">Bijna vol</span>
+    <span class="badge b-danger">Verhuurd</span>
+    <span class="badge b-neutral">Concept</span>
+  </div>
+  <div class="row"><span class="label">Accent</span>
+    <span class="badge b-accent">Nieuw</span>
+    <span class="badge b-solid">Gereserveerd</span>
+  </div>
+  <div class="row"><span class="label">Tags</span>
+    <span class="tag">Verhuizing</span>
+    <span class="tag">ZZP</span>
+    <span class="tag">Seizoensopslag</span>
+  </div>
+</body>
+</html>

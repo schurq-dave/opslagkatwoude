@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--room-100); font-family: var(--font-sans); font-size: 15px; }
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 13px; font-weight: 500; color: var(--ink-900); margin-bottom: 6px; }
+  input, select {
+    width: 100%; font-family: inherit; font-size: 15px; padding: 11px 14px;
+    background: var(--room-50); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--ink-900); box-sizing: border-box;
+    transition: border-color 200ms, box-shadow 200ms;
+  }
+  input:focus, select:focus { outline: none; border-color: var(--green-800); box-shadow: 0 0 0 3px rgba(201,169,97,0.3); }
+  input.error { border-color: #8B3A2E; }
+  .help { font-size: 12px; color: var(--ink-500); margin-top: 4px; }
+  .err { font-size: 12px; color: #8B3A2E; margin-top: 4px; }
+</style>
+</head>
+<body>
+  <div class="field">
+    <label>Naam</label>
+    <input type="text" value="Lisanne de Boer">
+  </div>
+  <div class="field">
+    <label>E-mailadres</label>
+    <input type="email" placeholder="naam@voorbeeld.nl">
+    <div class="help">We sturen hier je contract en reserveringsbevestiging heen.</div>
+  </div>
+  <div class="field">
+    <label>Postcode</label>
+    <input type="text" class="error" value="1131">
+    <div class="err">Vul zes tekens in, bijvoorbeeld 1131AB.</div>
+  </div>
+</body>
+</html>

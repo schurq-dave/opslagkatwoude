@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding: 24px; background: var(--room-100); font-family: var(--font-sans); font-size: 13px; }
+  .row { display: grid; grid-template-columns: 140px 1fr 120px; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--border); align-items: center; }
+  .row:last-child { border-bottom: 0; }
+  .token { font-family: var(--font-mono); font-size: 11px; color: var(--ink-700); }
+  .desc { color: var(--ink-500); font-size: 12px; }
+  .chip { height: 28px; border-radius: 4px; border: 1px solid var(--border); }
+  .wrap { background: var(--room-50); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row"><span class="token">--bg</span><span class="desc">primaire achtergrond</span><div class="chip" style="background:#F2ECE0"></div></div>
+    <div class="row"><span class="token">--bg-raised</span><span class="desc">cards, panels</span><div class="chip" style="background:#F8F4EB"></div></div>
+    <div class="row"><span class="token">--bg-inverse</span><span class="desc">donkere secties, footer</span><div class="chip" style="background:#2E3F2A"></div></div>
+    <div class="row"><span class="token">--fg</span><span class="desc">body-tekst</span><div class="chip" style="background:#1F1C18"></div></div>
+    <div class="row"><span class="token">--fg-muted</span><span class="desc">secundaire tekst</span><div class="chip" style="background:#3A332B"></div></div>
+    <div class="row"><span class="token">--fg-subtle</span><span class="desc">meta, labels</span><div class="chip" style="background:#6B6257"></div></div>
+    <div class="row"><span class="token">--accent</span><span class="desc">CTA's, belangrijke elementen</span><div class="chip" style="background:#C9A961"></div></div>
+    <div class="row"><span class="token">--border</span><span class="desc">standaard lijnen</span><div class="chip" style="background:#DDD2BD"></div></div>
+  </div>
+</body>
+</html>

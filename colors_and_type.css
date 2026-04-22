@@ -1,0 +1,299 @@
+/* =========================================================================
+   OPSLAG KATWOUDE — Design Tokens
+   "polder bij laag licht" — aardse tinten, natuurlijke contrasten
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+/* FONT SUBSTITUTIONS — flagged
+   Headings: DM Sans (Google Fonts) — geometric humanist sans, ook in logo gebruikt
+   Body:     TT Interphases (commercial, TypeType) → Work Sans as closest free match
+   Replace body by self-hosting the licensed TT Interphases .woff2 files. */
+
+:root {
+  /* -----------------------------------------------------------------------
+     COLOR — base palette
+     Elke kleur komt uit de omgeving: weiland, aarde, koolzaad, linnen, water.
+     ----------------------------------------------------------------------- */
+
+  /* Primair — Diepgroen (weiland in de avond) */
+  --green-900: #1C2819;   /* donkerste — hover/press op groene vlakken */
+  --green-800: #2E3F2A;   /* PRIMARY — headers, logo, grote vlakken */
+  --green-700: #364A32;   /* alt primary */
+  --green-600: #4A6244;   /* lichter, voor secundaire elementen */
+  --green-300: #A9B9A1;   /* zacht groen, borders / subtiele accenten */
+  --green-100: #E4E9DF;   /* zeer zacht — hover-vlakken op room */
+
+  /* Anker — Zacht zwart / natte aarde */
+  --ink-900: #1F1C18;     /* tekst, contrastelementen */
+  --ink-700: #3A332B;     /* secundaire tekst */
+  --ink-500: #6B6257;     /* tertiair, labels, meta */
+  --ink-300: #A69E91;     /* placeholder, disabled */
+
+  /* Accent — Gerijpt oker / koolzaadgeel */
+  --oker-700: #A88A4E;    /* hover/press op accent */
+  --oker-600: #C9A961;    /* PRIMARY ACCENT — knoppen */
+  --oker-500: #D4B868;    /* alt accent, iets lichter */
+  --oker-200: #EAD9A8;    /* zachte oker-vlakken */
+  --oker-100: #F5ECD4;    /* zeer zacht — hover op room */
+
+  /* Basis — Warme room / zandsteen */
+  --room-100: #F2ECE0;    /* PRIMARY BACKGROUND */
+  --room-200: #EAE2D2;    /* secundaire achtergrond / cards op room */
+  --room-300: #DDD2BD;    /* borders op room */
+  --room-50:  #F8F4EB;    /* lichtste — cards/panels */
+
+  /* Ondersteunend — Waterblauw gedempt (Markermeer, sloten) */
+  --water-700: #3F525A;
+  --water-600: #5A6F78;   /* subtiele accenten, iconen */
+  --water-300: #9FAEB3;
+
+  /* Semantiek */
+  --success: #4A6244;
+  --warning: #A88A4E;
+  --danger:  #8B3A2E;     /* gedempt terracotta, geen felrood */
+  --info:    #5A6F78;
+
+  /* -----------------------------------------------------------------------
+     SEMANTIC COLOR TOKENS — gebruik deze in componenten
+     ----------------------------------------------------------------------- */
+  --bg:            var(--room-100);
+  --bg-raised:     var(--room-50);
+  --bg-sunken:     var(--room-200);
+  --bg-inverse:    var(--green-800);
+
+  --fg:            var(--ink-900);
+  --fg-muted:      var(--ink-700);
+  --fg-subtle:     var(--ink-500);
+  --fg-disabled:   var(--ink-300);
+  --fg-inverse:    var(--room-50);
+
+  --border:        var(--room-300);
+  --border-strong: var(--ink-300);
+  --border-inverse:var(--green-700);
+
+  --accent:        var(--oker-600);
+  --accent-hover:  var(--oker-700);
+  --accent-fg:     var(--ink-900);  /* tekst op oker */
+
+  --primary:       var(--green-800);
+  --primary-hover: var(--green-900);
+  --primary-fg:    var(--room-50);
+
+  /* -----------------------------------------------------------------------
+     TYPOGRAPHY — base
+     Display: DM Sans (via Google Fonts) — huisstijl-letter voor koppen
+     Body:    Work Sans (via Google Fonts) — humanist sans, leesbaar
+     ----------------------------------------------------------------------- */
+  --font-display: 'DM Sans', -apple-system, sans-serif;
+  --font-sans:    'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif:   var(--font-display); /* legacy alias */
+  --font-mono:    'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+  /* Fluide schaal. Body nooit onder 17px. */
+  --text-xs:   0.8125rem;   /* 13px — meta/labels only */
+  --text-sm:   0.9375rem;   /* 15px */
+  --text-base: 1.0625rem;   /* 17px — body minimum */
+  --text-md:   1.1875rem;   /* 19px — intro/lead */
+  --text-lg:   1.375rem;    /* 22px */
+  --text-xl:   1.75rem;     /* 28px */
+  --text-2xl:  2.25rem;     /* 36px */
+  --text-3xl:  3rem;        /* 48px */
+  --text-4xl:  4rem;        /* 64px */
+  --text-5xl:  5.5rem;      /* 88px — display */
+
+  --leading-tight:  1.1;
+  --leading-snug:   1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed:1.65;   /* body default — doelgroep leesbaarheid */
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-caps:   0.08em; /* kleine all-caps labels */
+
+  /* -----------------------------------------------------------------------
+     SPACING — ruim, laat "lucht" in de compositie
+     ----------------------------------------------------------------------- */
+  --space-1:  0.25rem;   /* 4 */
+  --space-2:  0.5rem;    /* 8 */
+  --space-3:  0.75rem;   /* 12 */
+  --space-4:  1rem;      /* 16 */
+  --space-5:  1.5rem;    /* 24 */
+  --space-6:  2rem;      /* 32 */
+  --space-7:  3rem;      /* 48 */
+  --space-8:  4rem;      /* 64 */
+  --space-9:  6rem;      /* 96 */
+  --space-10: 8rem;      /* 128 — sectiescheiding */
+
+  /* -----------------------------------------------------------------------
+     RADII — degelijk, niet pillow-soft. Ergens tussen schuur en container.
+     ----------------------------------------------------------------------- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;    /* cards, inputs */
+  --radius-lg: 10px;   /* grotere panels */
+  --radius-xl: 16px;   /* hero blocks */
+  --radius-full: 999px;
+
+  /* -----------------------------------------------------------------------
+     SHADOW — subtiel, warm (geen koele blauwe schaduw)
+     ----------------------------------------------------------------------- */
+  --shadow-xs: 0 1px 1px rgba(31, 28, 24, 0.04);
+  --shadow-sm: 0 1px 2px rgba(31, 28, 24, 0.06), 0 1px 3px rgba(31, 28, 24, 0.04);
+  --shadow-md: 0 2px 4px rgba(31, 28, 24, 0.06), 0 4px 12px rgba(31, 28, 24, 0.06);
+  --shadow-lg: 0 8px 24px rgba(31, 28, 24, 0.10), 0 2px 6px rgba(31, 28, 24, 0.06);
+  --shadow-inner: inset 0 1px 2px rgba(31, 28, 24, 0.08);
+
+  /* -----------------------------------------------------------------------
+     MOTION — rustig, geen bounces
+     ----------------------------------------------------------------------- */
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-out:      cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-in:       cubic-bezier(0.4, 0.0, 1, 1);
+  --dur-fast:      120ms;
+  --dur-base:      200ms;
+  --dur-slow:      320ms;
+
+  /* -----------------------------------------------------------------------
+     LAYOUT
+     ----------------------------------------------------------------------- */
+  --container-sm: 640px;
+  --container-md: 880px;
+  --container-lg: 1120px;
+  --container-xl: 1320px;
+  --gutter:       var(--space-5);
+}
+
+/* =========================================================================
+   SEMANTIC ELEMENT STYLES
+   ========================================================================= */
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--fg);
+  background: var(--bg);
+  margin: 0;
+}
+
+/* Display — voor hero's. Museo Sans — warm humanist sans, zwaar genoeg voor impact. */
+.display, h1.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw + 1rem, var(--text-5xl));
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg);
+  margin: 0 0 var(--space-5);
+  text-wrap: balance;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg);
+  margin: 0 0 var(--space-5);
+  text-wrap: balance;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg);
+  margin: 0 0 var(--space-4);
+  text-wrap: balance;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: var(--fg);
+  margin: 0 0 var(--space-3);
+}
+
+h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  color: var(--fg);
+  margin: 0 0 var(--space-3);
+}
+
+p, li {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+p { margin: 0 0 var(--space-4); }
+
+.lead {
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-muted);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+.meta {
+  font-size: var(--text-sm);
+  color: var(--fg-subtle);
+}
+
+a {
+  color: var(--green-800);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--green-300);
+  transition: text-decoration-color var(--dur-fast) var(--ease-standard);
+}
+a:hover { text-decoration-color: var(--green-800); }
+
+code, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  background: var(--room-200);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-xs);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--space-7) 0;
+}
+
+::selection {
+  background: var(--oker-200);
+  color: var(--ink-900);
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--room-100); font-family: var(--font-sans); }
+  .scale { display: grid; grid-template-columns: 110px 1fr; gap: 0; align-items: stretch; margin-bottom: 10px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); background: var(--room-50); }
+  .label { padding: 12px 14px; font-size: 12px; color: var(--ink-700); display: flex; flex-direction: column; justify-content: center; gap: 2px;}
+  .label .k { font-weight: 600; color: var(--ink-900); font-size: 13px;}
+  .label .r { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-500);}
+  .chips { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .c { height: 44px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-family: var(--font-mono);}
+  .c.main { box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="scale">
+    <div class="label"><span class="k">Groen</span><span class="r">primair</span></div>
+    <div class="chips">
+      <div class="c" style="background:#E4E9DF;color:#2E3F2A">zacht</div>
+      <div class="c main" style="background:#2E3F2A;color:#E4E9DF">#2E3F2A</div>
+      <div class="c" style="background:#1C2819;color:#A9B9A1">donker</div>
+    </div>
+  </div>
+  <div class="scale">
+    <div class="label"><span class="k">Oker</span><span class="r">accent</span></div>
+    <div class="chips">
+      <div class="c" style="background:#F5ECD4;color:#8A7137">zacht</div>
+      <div class="c main" style="background:#C9A961;color:#1F1C18">#C9A961</div>
+      <div class="c" style="background:#A88A4E;color:#F5ECD4">donker</div>
+    </div>
+  </div>
+  <div class="scale">
+    <div class="label"><span class="k">Ink</span><span class="r">tekst</span></div>
+    <div class="chips">
+      <div class="c" style="background:#6B6257;color:#F8F4EB">subtle</div>
+      <div class="c" style="background:#3A332B;color:#F8F4EB">muted</div>
+      <div class="c main" style="background:#1F1C18;color:#F8F4EB">#1F1C18</div>
+    </div>
+  </div>
+  <div class="scale">
+    <div class="label"><span class="k">Room</span><span class="r">basis</span></div>
+    <div class="chips">
+      <div class="c" style="background:#F8F4EB;color:#6B6257">raised</div>
+      <div class="c main" style="background:#F2ECE0;color:#3A332B">#F2ECE0</div>
+      <div class="c" style="background:#DDD2BD;color:#3A332B">border</div>
+    </div>
+  </div>
+</body>
+</html>

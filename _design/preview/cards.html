@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--room-100); font-family: var(--font-sans); color: var(--ink-900); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .card { border-radius: 12px; padding: 22px; }
+  .card.light { background: var(--room-50); border: 1px solid var(--border); }
+  .card.dark  { background: var(--green-800); color: var(--room-50); }
+
+  .eyebrow { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; color: var(--oker-600); }
+  .card.dark .eyebrow { color: var(--oker-500); }
+
+  h3 { font-family: var(--font-display); font-weight: 700; font-size: 22px; margin: 0 0 8px; line-height: 1.2; letter-spacing: -0.01em;}
+  p  { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-700); }
+  .card.dark p { color: var(--room-200); }
+
+  .price { font-family: var(--font-display); font-size: 30px; font-weight: 700; margin-top: 14px; letter-spacing: -0.02em;}
+  .price small { font-family: var(--font-sans); font-size: 13px; color: var(--ink-500); font-weight: 500; margin-left: 2px;}
+  .card.dark .price small { color: var(--room-200); }
+
+  .cta { margin-top: 16px; display: inline-flex; align-items: center; gap: 10px;
+         font-size: 13px; font-weight: 600; padding: 12px 16px 12px 20px; border-radius: 999px; border: 0; cursor: pointer;
+         background: var(--oker-600); color: var(--ink-900); }
+  .cta .dot { width: 22px; height: 22px; border-radius: 999px; background: var(--ink-900); color: var(--room-50); display: grid; place-items: center;}
+
+  .quote { background: var(--room-50); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+  .stars { color: var(--oker-600); letter-spacing: 2px; font-size: 14px; margin-bottom: 10px;}
+  .quote p.q { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--ink-900); line-height: 1.4; margin: 0 0 12px; letter-spacing: -0.01em;}
+  .byline { font-size: 12px; color: var(--ink-500);}
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="card light">
+      <div class="eyebrow">Container · licht</div>
+      <h3>24 m² container</h3>
+      <p>Gewoon een container. Eigen slot. 24/7 toegang.</p>
+      <div class="price">€175 <small>/ maand</small></div>
+      <button class="cta">Reserveer
+        <span class="dot"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+    <div class="card dark">
+      <div class="eyebrow">Container · donker</div>
+      <h3>24 m² container</h3>
+      <p>Zelfde container, donkere sectie — bijv. op het werkwijze-blok.</p>
+      <div class="price">€175 <small>/ maand</small></div>
+      <button class="cta">Reserveer
+        <span class="dot"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+    <div class="quote" style="grid-column: 1 / -1;">
+      <div class="stars">★★★★★</div>
+      <p class="q">"Online gereserveerd, binnen een uur de sleutel. Geen gedoe."</p>
+      <div class="byline">— Anouk de Boer · Edam · verbouwing</div>
+    </div>
+  </div>
+</body>
+</html>

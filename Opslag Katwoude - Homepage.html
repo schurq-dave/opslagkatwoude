@@ -1,0 +1,1725 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <title>Opslag Katwoude — Gewoon een container. Gewoon opslag.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="icon" href="assets/mark.svg">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+  <style>
+    html, body { margin: 0; background: #2E3F2A; }
+    #root { min-height: 100vh; }
+    a { color: inherit; }
+
+    /* ==== Pill CTA ==== */
+    .ok-pill {
+      font-family: inherit; font-weight: 600;
+      border: 0; border-radius: 999px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 12px;
+      line-height: 1; font-size: 15px;
+      padding: 16px 22px 16px 26px;
+      transition: transform 160ms ease, box-shadow 220ms ease;
+    }
+    .ok-pill--sm { font-size: 14px; padding: 12px 18px 12px 22px; gap: 10px; }
+    .ok-pill--dark   { background: var(--ink-900);  color: var(--room-50); box-shadow: 0 8px 20px rgba(31,28,24,0.15); }
+    .ok-pill--accent { background: var(--oker-600); color: var(--ink-900); box-shadow: 0 8px 20px rgba(31,28,24,0.15); }
+    .ok-pill--flat   { box-shadow: none; }
+    .ok-pill:hover   { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(31,28,24,0.22); }
+    .ok-pill--flat:hover { box-shadow: 0 10px 24px rgba(0,0,0,0.25); }
+
+    .ok-pill__dot {
+      width: 26px; height: 26px; border-radius: 999px;
+      display: grid; place-items: center;
+      position: relative; overflow: hidden;
+      transition: transform 220ms cubic-bezier(.34,1.2,.64,1);
+    }
+    .ok-pill--sm .ok-pill__dot { width: 22px; height: 22px; }
+    .ok-pill--dark   .ok-pill__dot { background: var(--oker-600); color: var(--ink-900); }
+    .ok-pill--accent .ok-pill__dot { background: var(--ink-900);  color: var(--room-50); }
+    .ok-pill:hover .ok-pill__dot   { transform: translateX(4px); }
+    .ok-pill:active .ok-pill__dot  { transform: translateX(6px); }
+    .ok-pill__label { transition: transform 220ms ease; }
+    .ok-pill:hover .ok-pill__label { transform: translateX(-2px); }
+
+    /* ==== FAQ smooth open ==== */
+    .ok-faq__body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 320ms cubic-bezier(.4,0,.2,1), opacity 260ms ease;
+      opacity: 0;
+    }
+    .ok-faq__body--open { grid-template-rows: 1fr; opacity: 1; }
+    .ok-faq__body > div { overflow: hidden; }
+    .ok-faq__chev { transition: transform 280ms cubic-bezier(.4,0,.2,1); }
+    .ok-faq__chev--open { transform: rotate(180deg); }
+
+    /* ==== Card lift (subtle) ==== */
+    .ok-lift { transition: transform 200ms ease, box-shadow 260ms ease; }
+    .ok-lift:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(31,28,24,0.10); }
+
+    /* ==== Mobile responsive ==== */
+    @media (max-width: 960px) {
+      /* Hero — vult viewport, alles in beeld */
+      .ok-hero {
+        min-height: 100svh !important;
+        display: flex !important; align-items: flex-start !important;
+        margin-top: -84px !important;
+        padding-top: 84px !important;
+        background:
+          linear-gradient(180deg, rgba(46,63,42,0.6) 0%, rgba(46,63,42,0.3) 40%, rgba(46,63,42,0.75) 100%),
+          url(assets/hero-container.png) top center / cover no-repeat !important;
+      }
+      .ok-hero-inner { padding: 120px 20px 40px !important; width: 100% !important; }
+      .ok-hero-stats { grid-template-columns: repeat(2, 1fr) !important; column-gap: 24px !important; row-gap: 14px !important; }
+      .ok-hero h1 { font-size: clamp(44px, 11vw, 60px) !important; margin-bottom: 16px !important; line-height: 1.04 !important; }
+      .ok-hero-lede { font-size: 15px !important; line-height: 1.5 !important; }
+      .ok-h2 { font-size: clamp(28px, 6.5vw, 38px) !important; line-height: 1.08 !important; }
+      h2 { font-size: clamp(28px, 6.5vw, 38px) !important; }
+      h3 { font-size: 18px !important; }
+      .ok-hero-lede { font-size: 16px !important; margin-bottom: 20px !important; }
+      .ok-hero-cta-row { margin-bottom: 24px !important; }
+      .ok-hero-eyebrow { margin-bottom: 12px !important; }
+
+      /* Header — iets lager op mobiel, hamburger aan */
+      .ok-header { top: 12px !important; padding: 0 16px !important; }
+      .ok-nav-links { display: none !important; }
+      .ok-nav-search { display: none !important; }
+      .ok-nav-burger { display: grid !important; }
+      .ok-nav-drawer { display: block !important; }
+      .ok-nav { padding: 8px 8px 8px 20px !important; gap: 10px !important; }
+      .ok-nav-logo { height: 30px !important; }
+      .ok-nav-cta { padding: 10px 16px !important; font-size: 13px !important; }
+
+      /* Generic section padding */
+      .ok-sec { padding: 64px 20px !important; }
+      .ok-sec-inner { padding-left: 0 !important; padding-right: 0 !important; }
+
+      /* Two-col layouts → single col */
+      .ok-2col { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .ok-3col { grid-template-columns: 1fr !important; gap: 20px !important; }
+      .ok-4col { grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important; }
+
+      /* Nav */
+      .ok-nav-logo { height: 32px !important; }
+
+      /* Headings scale */
+      .ok-h2 { font-size: clamp(32px, 6vw, 40px) !important; }
+      .ok-h2-big { font-size: clamp(36px, 7vw, 52px) !important; }
+
+      /* Werkwijze — stack + solid overlay on mobile */
+      .ok-werk { 
+        background: linear-gradient(180deg, rgba(31,28,24,0.95) 0%, rgba(31,28,24,0.85) 100%), url(assets/containers-weiland.jpeg) center/cover no-repeat !important; 
+        padding: 64px 20px !important; 
+      }
+      .ok-werk-grid { display: flex !important; flex-direction: column !important; gap: 32px !important; }
+      .ok-werk-text { order: 1; }
+      .ok-werk-steps { order: 2; }
+      .ok-werk-cta { order: 3; }
+
+      /* Propositie B numbered rows */
+      .ok-prop-b-row { grid-template-columns: 64px 1fr !important; gap: 20px !important; padding: 24px 0 !important; }
+      .ok-prop-b-row > :nth-child(2) { font-size: 28px !important; }
+      .ok-prop-b-row > :nth-child(3) { grid-column: 1 / -1 !important; font-size: 15px !important; }
+      .ok-prop-b-num { font-size: 44px !important; }
+
+      /* Propositie C hero card */
+      .ok-prop-c-hero { padding: 40px 28px !important; min-height: 340px !important; }
+      .ok-prop-c-price { font-size: clamp(60px, 14vw, 84px) !important; }
+
+      /* Container A/B/C */
+      .ok-cont-a-price { font-size: 72px !important; }
+      .ok-cont-b-head { grid-template-columns: 1fr !important; padding: 40px 24px !important; gap: 20px !important; }
+      .ok-cont-b-price { font-size: 72px !important; padding: 4px 16px !important; }
+      .ok-cont-b-features { padding: 28px 24px !important; grid-template-columns: 1fr !important; }
+      .ok-cont-c { padding: 44px 24px !important; min-height: 480px !important; }
+      .ok-cont-c h2 { font-size: clamp(36px, 8vw, 48px) !important; }
+      .ok-cont-c-tag { top: 20px !important; right: 20px !important; }
+      .ok-cont-c-grid { grid-template-columns: 1fr 1fr !important; }
+
+      /* Plattegrond */
+      .ok-plat-grid { display: flex !important; flex-direction: column !important; gap: 32px !important; }
+      .ok-plat-left { display: contents !important; }
+      .ok-plat-text { order: 1; }
+      .ok-plat-map { order: 2; }
+      .ok-plat-legend { order: 3; }
+      .ok-plat-cta { order: 4; }
+      .ok-plat-board { padding: 20px !important; }
+
+      /* FAQ */
+      .ok-faq-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+
+      /* SocialProof */
+      .ok-sp-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+      /* Footer */
+      .ok-foot { padding: 56px 20px 24px !important; }
+      .ok-foot-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+
+      /* Tweak panel — compact */
+      .ok-tweak-panel { width: calc(100vw - 32px) !important; right: 16px !important; bottom: 16px !important; }
+
+      /* Map aspect */
+      .ok-map { aspect-ratio: 4 / 3 !important; }
+    }
+
+    @media (max-width: 560px) {
+      .ok-foot-grid { grid-template-columns: 1fr !important; }
+      .ok-hero-stats { grid-template-columns: 1fr 1fr !important; column-gap: 20px !important; }
+      .ok-cont-c-grid { grid-template-columns: 1fr !important; }
+      /* 4-col USP blijft 2x2 op mobiel, niet 1 kolom */
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="ui_kits/website/Primitives.jsx"></script>
+
+  <script type="text/babel">
+
+
+/* =====================================================================
+   Opslag Katwoude — Homepage (standalone)
+   Gebouwd op design tokens uit colors_and_type.css + Primitives.jsx
+   ===================================================================== */
+
+const LOGO = 'assets/logo.svg';
+const LOGO_I = 'assets/logo-inverse.svg';
+const HERO = 'assets/hero-container.png';
+
+/* --------------------------------------------------------------------
+   TWEAKABLE DEFAULTS
+   -------------------------------------------------------------------- */
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "propositieVariant": "A",
+  "containerVariant": "A"
+}/*EDITMODE-END*/;
+
+const TweakContext = React.createContext(TWEAK_DEFAULTS);
+function useTweak(key) { return React.useContext(TweakContext)[key]; }
+
+/* --------------------------------------------------------------------
+   SHARED PRIMITIVES — hero-stijl in één plek gedefinieerd
+   -------------------------------------------------------------------- */
+
+/* Pill-CTA: zwart met inline oker pijl-cirkel. De huis-call-to-action. 
+   Pijl schuift bij hover (micro-interaction). */
+function PillCTA({ children, onDark = false, small = false, variant = 'dark' }) {
+  const accent = variant === 'accent';
+  const cls = [
+    'ok-pill',
+    small  ? 'ok-pill--sm'  : '',
+    accent ? 'ok-pill--accent' : 'ok-pill--dark',
+    onDark ? 'ok-pill--flat'   : '',
+  ].filter(Boolean).join(' ');
+  return (
+    <button className={cls}>
+      <span className="ok-pill__label">{children}</span>
+      <span className="ok-pill__dot">
+        <svg viewBox="0 0 24 24" width={small ? 12 : 14} height={small ? 12 : 14} fill="none"
+          stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </span>
+    </button>
+  );
+}
+
+/* Highlight: oker skew-block om één signatuurwoord in een kop te laten knallen. */
+function Highlight({ children, color = 'var(--oker-500)' }) {
+  return (
+    <span style={{
+      display: 'inline-block',
+      background: color,
+      color: 'var(--ink-900)',
+      padding: '0 16px',
+      transform: 'skew(-2deg)',
+      marginTop: 6,
+      whiteSpace: 'nowrap',
+    }}>
+      <span style={{ display: 'inline-block', transform: 'skew(2deg)' }}>{children}</span>
+    </span>
+  );
+}
+
+/* Display heading — consistent bold DM Sans met optionele highlight. */
+function DisplayH2({ children, dark = false, size = 52 }) {
+  return (
+    <h2 style={{
+      fontFamily: 'var(--font-display)',
+      fontSize: size, lineHeight: 1.05, letterSpacing: '-0.025em', fontWeight: 700,
+      color: dark ? 'var(--room-50)' : 'var(--ink-900)',
+      margin: '0 0 20px',
+      textWrap: 'balance',
+    }}>{children}</h2>
+  );
+}
+
+/* --------------------------------------------------------------------
+   HEADER — floating pill nav (LogCargo-stijl)
+   -------------------------------------------------------------------- */
+function Header() {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const link = (label, active = false) => (
+    <a href="#" onClick={() => setMenuOpen(false)} style={{
+      padding: '10px 6px', fontSize: 15,
+      color: active ? 'var(--ink-900)' : 'var(--ink-700)',
+      fontWeight: active ? 600 : 500, textDecoration: 'none',
+      display: 'inline-flex', alignItems: 'center', gap: 6,
+    }}>{label}</a>
+  );
+  const mobileLink = (label, active = false) => (
+    <a href="#" onClick={() => setMenuOpen(false)} style={{
+      padding: '16px 0', fontSize: 22, fontFamily: 'var(--font-display)',
+      color: active ? 'var(--ink-900)' : 'var(--ink-700)',
+      fontWeight: active ? 700 : 500, textDecoration: 'none',
+      letterSpacing: '-0.01em',
+      borderBottom: '1px solid var(--border)',
+      display: 'block',
+    }}>{label}</a>
+  );
+
+  return (
+    <header className="ok-header" style={{
+      position: 'sticky', top: 20, zIndex: 50,
+      padding: '0 24px',
+    }}>
+      <div className="ok-nav" style={{
+        maxWidth: 1280, margin: '0 auto',
+        background: 'rgba(251,248,242,0.92)',
+        border: '1px solid var(--border)',
+        borderRadius: 999,
+        padding: '10px 14px 10px 28px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32,
+        boxShadow: '0 8px 24px rgba(31,28,24,0.06), 0 2px 6px rgba(31,28,24,0.04)',
+        backdropFilter: 'blur(10px)',
+      }}>
+        <a href="#" style={{ display: 'block' }}>
+          <img src={LOGO} alt="Opslag Katwoude" className="ok-nav-logo" style={{ height: 40, display: 'block' }} />
+        </a>
+        <nav className="ok-nav-links" style={{ display: 'flex', gap: 32 }}>
+          {link('Home', true)}
+          {link('Werkwijze')}
+          {link('Over ons')}
+          {link('Contact')}
+          {link('Blog')}
+        </nav>
+        <div className="ok-nav-actions" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <button aria-label="Zoeken" className="ok-nav-search" style={{
+            width: 40, height: 40, borderRadius: 999, border: '1px solid var(--border)',
+            background: 'transparent', cursor: 'pointer', display: 'grid', placeItems: 'center',
+            color: 'var(--ink-700)',
+          }}>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+              <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+            </svg>
+          </button>
+          <button className="ok-nav-cta" style={{
+            fontFamily: 'inherit', fontSize: 14, fontWeight: 600,
+            padding: '12px 22px', borderRadius: 999, border: 0, cursor: 'pointer',
+            background: 'var(--ink-900)', color: 'var(--room-50)',
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+          }}>
+            Reserveer
+            <span style={{
+              width: 22, height: 22, borderRadius: 999, background: 'var(--oker-600)',
+              display: 'grid', placeItems: 'center', color: 'var(--ink-900)',
+            }}>
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </button>
+          {/* Hamburger — alleen zichtbaar op mobiel via CSS */}
+          <button
+            aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(o => !o)}
+            className="ok-nav-burger"
+            style={{
+              width: 40, height: 40, borderRadius: 999, border: '1px solid var(--border)',
+              background: menuOpen ? 'var(--ink-900)' : 'transparent', cursor: 'pointer',
+              display: 'none', placeItems: 'center',
+              color: menuOpen ? 'var(--room-50)' : 'var(--ink-900)',
+              transition: 'background 200ms, color 200ms',
+            }}>
+            {menuOpen ? (
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M6 6l12 12M18 6L6 18"/>
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M4 7h16M4 12h16M4 17h16"/>
+              </svg>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile drawer */}
+      <div className="ok-nav-drawer" style={{
+        display: 'none',
+        maxWidth: 1280, margin: '12px auto 0',
+        background: 'var(--room-50)',
+        border: '1px solid var(--border)',
+        borderRadius: 20,
+        padding: menuOpen ? '8px 24px 20px' : '0 24px',
+        maxHeight: menuOpen ? 500 : 0,
+        opacity: menuOpen ? 1 : 0,
+        overflow: 'hidden',
+        transition: 'max-height 320ms cubic-bezier(.4,0,.2,1), opacity 240ms ease, padding 320ms ease',
+        boxShadow: '0 8px 24px rgba(31,28,24,0.06)',
+      }}>
+        <nav style={{ display: 'flex', flexDirection: 'column' }}>
+          {mobileLink('Home', true)}
+          {mobileLink('Werkwijze')}
+          {mobileLink('Over ons')}
+          {mobileLink('Contact')}
+          {mobileLink('Blog')}
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+/* --------------------------------------------------------------------
+   HERO — full-bleed weilandfoto met lichte gradient voor leesbaarheid
+   -------------------------------------------------------------------- */
+function Hero() {
+  return (
+    <section className="ok-hero" style={{
+      position: 'relative',
+      background: `
+        linear-gradient(100deg, rgba(46,63,42,0.92) 0%, rgba(46,63,42,0.75) 32%, rgba(46,63,42,0.2) 60%, rgba(46,63,42,0) 100%),
+        url(${HERO}) center/cover no-repeat
+      `,
+      overflow: 'hidden',
+      minHeight: 680,
+      marginTop: -84, /* hero loopt achter de floating nav door */
+      paddingTop: 84,
+    }}>
+      <div className="ok-hero-inner" style={{
+        maxWidth: 1320, margin: '0 auto',
+        padding: '120px 32px 96px',
+        position: 'relative', zIndex: 2,
+      }}>
+        <div style={{ maxWidth: 640 }}>
+          <div className="ok-hero-eyebrow" style={{
+            fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: 'var(--oker-500)', marginBottom: 20,
+          }}>Katwoude · Lagedijk 9</div>
+
+          <h1 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(48px, 5.5vw, 84px)',
+            lineHeight: 1.02, letterSpacing: '-0.03em', fontWeight: 700,
+            color: 'var(--room-50)', margin: '0 0 28px',
+          }}>
+            Gewoon een<br/>
+            container voor <Highlight>opslag.</Highlight>
+          </h1>
+
+          <p className="ok-hero-lede" style={{
+            fontSize: 18, lineHeight: 1.6, color: 'var(--room-200)',
+            maxWidth: 460, margin: '0 0 36px',
+          }}>
+            24 m². €175 per maand. Vandaag geregeld. Naast Hotel Katwoude, tussen de weilanden.
+          </p>
+
+          <div className="ok-hero-cta-row" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 56 }}>
+            <PillCTA>Reserveer container</PillCTA>
+            <a href="#" style={{
+              fontFamily: 'inherit', fontSize: 15, fontWeight: 500,
+              padding: '16px 8px', color: 'var(--room-50)', textDecoration: 'underline',
+              textUnderlineOffset: 4, display: 'inline-flex', alignItems: 'center',
+            }}>Bekijk werkwijze</a>
+          </div>
+
+          <div className="ok-hero-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, auto)', columnGap: 48, rowGap: 20, justifyContent: 'start' }}>
+            <StatMini k="400+" v="Containers"/>
+            <StatMini k="24/7" v="Toegang"/>
+            <StatMini k="€0"   v="Borg"/>
+            <StatMini k="Geen" v="Opzegtermijn"/>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StatMini({ k, v }) {
+  return (
+    <div>
+      <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 26, color: 'var(--room-50)', letterSpacing: '-0.02em' }}>{k}</div>
+      <div style={{ fontSize: 13, color: 'var(--room-200)', marginTop: 2 }}>{v}</div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------------
+   PROPOSITIE — 3 varianten (Tweak: propositieVariant)
+   A: iconen (baseline) · B: groot genummerd, tekst als held · C: asymmetrisch
+   -------------------------------------------------------------------- */
+function Propositie() {
+  const variant = useTweak('propositieVariant') || 'A';
+  const items = [
+    { icon: 'mapPin', k: 'Dichtbij',   v: 'Naast Hotel Katwoude. Binnen 7 km van Volendam, Edam, Monnickendam, Purmerend.' },
+    { icon: 'euro',   k: 'Voordelig',  v: '€175 per maand, alles inbegrepen. Scherpste prijs in de regio.' },
+    { icon: 'clock',  k: 'Direct',     v: '24/7 online te regelen. Geen wachttijd, geen verkoopgesprek.' },
+    { icon: 'shield', k: 'Degelijk',   v: '400+ zeecontainers, afgesloten terrein, duidelijke voorwaarden.' },
+  ];
+
+  if (variant === 'B') return <PropositieB items={items} />;
+  if (variant === 'C') return <PropositieC items={items} />;
+  return <PropositieA items={items} />;
+}
+
+/* A — de huidige: 4 kolommen, icoon naast titel */
+function PropositieA({ items }) {
+  return (
+    <Section bg="room" py={96}>
+      <div className="ok-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
+        {items.map((p) =>
+          <div key={p.k}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+              <span style={{ color: 'var(--green-800)', display: 'inline-flex' }}><Icon name={p.icon} size={22} /></span>
+              <h3 style={{ margin: 0 }}>{p.k}</h3>
+            </div>
+            <p style={{ margin: 0, fontSize: 15, color: 'var(--fg-muted)' }}>{p.v}</p>
+          </div>
+        )}
+      </div>
+    </Section>
+  );
+}
+
+/* B — groot genummerd, zonder iconen. Tekst als held, veel lucht. */
+function PropositieB({ items }) {
+  return (
+    <Section bg="room" py={112}>
+      <div style={{ display: 'grid', gap: 0 }}>
+        {items.map((p, i) =>
+          <div key={p.k} style={{
+            display: 'grid',
+            gridTemplateColumns: '120px 1fr 1fr',
+            gap: 48,
+            padding: '40px 0',
+            borderTop: '1px solid var(--border)',
+            borderBottom: i === items.length - 1 ? '1px solid var(--border)' : 'none',
+            alignItems: 'baseline',
+          }}>
+            <div style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 68,
+              fontWeight: 700,
+              letterSpacing: '-0.04em',
+              color: 'var(--oker-600)',
+              lineHeight: 1,
+            }}>
+              {String(i + 1).padStart(2, '0')}
+            </div>
+            <div style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 44,
+              fontWeight: 700,
+              letterSpacing: '-0.025em',
+              color: 'var(--ink-900)',
+              lineHeight: 1.05,
+            }}>
+              {p.k}.
+            </div>
+            <div style={{
+              fontSize: 17,
+              color: 'var(--fg-muted)',
+              lineHeight: 1.6,
+              maxWidth: 440,
+            }}>
+              {p.v}
+            </div>
+          </div>
+        )}
+      </div>
+    </Section>
+  );
+}
+
+/* C — asymmetrisch: één grote stat als held, drie kleinere eromheen. */
+function PropositieC({ items }) {
+  const [hero, ...rest] = items;
+  return (
+    <Section bg="room" py={96}>
+      <div className="ok-2col" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 56, alignItems: 'stretch' }}>
+        {/* Grote held */}
+        <div style={{
+          background: 'var(--ink-900)',
+          color: 'var(--room-50)',
+          borderRadius: 16,
+          padding: '64px 56px',
+          display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          minHeight: 420,
+        }}>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--oker-500)', marginBottom: 28 }}>
+              Reden #1
+            </div>
+            <div style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(72px, 8vw, 120px)',
+              fontWeight: 700, letterSpacing: '-0.04em',
+              lineHeight: 0.95, color: 'var(--room-50)',
+              marginBottom: 24,
+            }}>
+              €175<span style={{ color: 'var(--oker-500)' }}>.</span>
+            </div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 26, fontWeight: 600, marginBottom: 10 }}>
+              Per maand. Alles inbegrepen.
+            </div>
+            <p style={{ fontSize: 16, color: 'var(--room-200)', lineHeight: 1.6, margin: 0, maxWidth: 420 }}>
+              Scherpste prijs in de regio. Geen verborgen kosten, geen borg, geen opzegtermijn.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: 24, marginTop: 40, paddingTop: 24, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+            <div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--oker-500)' }}>24 m²</div>
+              <div style={{ fontSize: 13, color: 'var(--room-200)' }}>per container</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--oker-500)' }}>€0</div>
+              <div style={{ fontSize: 13, color: 'var(--room-200)' }}>borg</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--oker-500)' }}>0 dagen</div>
+              <div style={{ fontSize: 13, color: 'var(--room-200)' }}>opzegtermijn</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Drie kleinere */}
+        <div style={{ display: 'grid', gridTemplateRows: 'repeat(3, 1fr)', gap: 16 }}>
+          {rest.map((p, i) =>
+            <div key={p.k} style={{
+              background: 'var(--room-50)',
+              border: '1px solid var(--border)',
+              borderRadius: 12,
+              padding: '28px 32px',
+              display: 'grid', gridTemplateColumns: '52px 1fr', gap: 20,
+              alignItems: 'center',
+            }}>
+              <div style={{
+                width: 52, height: 52, borderRadius: 999,
+                background: 'var(--room-100)',
+                color: 'var(--green-800)',
+                display: 'grid', placeItems: 'center',
+              }}>
+                <Icon name={p.icon} size={22} />
+              </div>
+              <div>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--ink-900)', marginBottom: 4 }}>
+                  {p.k}
+                </div>
+                <div style={{ fontSize: 14, color: 'var(--fg-muted)', lineHeight: 1.5 }}>
+                  {p.v}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* --------------------------------------------------------------------
+   CONTAINER CARD — 3 varianten (Tweak: containerVariant)
+   A: prijs-blok naast features (baseline) · B: features IN de kaart, oker accent rond prijs · C: magazine — foto als achtergrond met prijs-tag
+   -------------------------------------------------------------------- */
+function Container() {
+  const variant = useTweak('containerVariant') || 'A';
+  if (variant === 'B') return <ContainerB />;
+  if (variant === 'C') return <ContainerC />;
+  return <ContainerA />;
+}
+
+const CONTAINER_FEATURES = [
+  '10 × 2,4 meter (24 m²)',
+  'Eigen slot, eigen sleutel',
+  '24/7 toegang tot het terrein',
+  'Afgesloten, verlicht, cameratoezicht',
+  'Geen opzegtermijn. Zeg op wanneer je klaar bent.'
+];
+
+/* A — baseline: twee kolommen, prijskaart rechts */
+function ContainerA() {
+  return (
+    <Section bg="raised" py={96}>
+      <div className="ok-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
+        <div>
+          <Eyebrow>Eén formaat. Eén prijs.</Eyebrow>
+          <DisplayH2 size={52}>
+            24 m². Genoeg voor een woning, voorraad, of een <Highlight>busje spullen.</Highlight>
+          </DisplayH2>
+          <p style={{ fontSize: 17, color: 'var(--fg-muted)', marginBottom: 28, maxWidth: 480, lineHeight: 1.6 }}>
+            Eén maat zeecontainer: 10 meter bij 2,4 meter. Schoon, droog, afgesloten. Je krijgt je eigen slot. Je komt wanneer je wil.
+          </p>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 12, maxWidth: 440 }}>
+            {CONTAINER_FEATURES.map((i) =>
+              <li key={i} style={{ display: 'flex', gap: 12, fontSize: 16, color: 'var(--ink-900)' }}>
+                <span style={{ color: 'var(--green-800)', marginTop: 2 }}><Icon name="check" size={18} /></span>
+                {i}
+              </li>
+            )}
+          </ul>
+        </div>
+        <div style={{
+          background: 'var(--room-50)',
+          border: '1px solid var(--border)',
+          borderRadius: 14,
+          padding: 40,
+          boxShadow: '0 16px 40px rgba(31,28,24,0.10), 0 4px 12px rgba(31,28,24,0.06)',
+          transition: 'transform 240ms ease, box-shadow 280ms ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-4px)';
+          e.currentTarget.style.boxShadow = '0 24px 56px rgba(31,28,24,0.14), 0 6px 16px rgba(31,28,24,0.08)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 16px 40px rgba(31,28,24,0.10), 0 4px 12px rgba(31,28,24,0.06)';
+        }}>
+          <Eyebrow>Prijs per maand</Eyebrow>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+            <span className="ok-cont-a-price" style={{ fontFamily: 'var(--font-display)', fontSize: 92, fontWeight: 700, lineHeight: 1, color: 'var(--ink-900)', letterSpacing: '-0.03em' }}>€175</span>
+            <span style={{ fontSize: 17, color: 'var(--fg-subtle)' }}>/ maand</span>
+          </div>
+          <p style={{ margin: '0 0 24px', fontSize: 14, color: 'var(--fg-subtle)' }}>Incl. BTW. Maandelijkse SEPA incasso.</p>
+          <hr style={{ border: 0, borderTop: '1px solid var(--border)', margin: '0 0 24px' }} />
+          <div style={{ display: 'grid', gap: 10, marginBottom: 28, fontSize: 15 }}>
+            <Row l="Oppervlakte" r="24 m²" />
+            <Row l="Afmetingen" r="10 × 2,4 m" />
+            <Row l="Opzegtermijn" r="Geen" />
+            <Row l="Borg" r="€0" />
+            <Row l="Aansluiting" r="Geen stroom" />
+          </div>
+          <PillCTA>Reserveer deze container</PillCTA>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* B — Alles in één prijskaart. Prijs in oker highlight-blok. Features met iconen. */
+function ContainerB() {
+  return (
+    <Section bg="raised" py={96}>
+      <div style={{ maxWidth: 720, margin: '0 auto 48px', textAlign: 'center' }}>
+        <Eyebrow>Eén formaat. Eén prijs.</Eyebrow>
+        <DisplayH2 size={48}>
+          24 m². Genoeg voor een <Highlight>busje spullen.</Highlight>
+        </DisplayH2>
+      </div>
+
+      <div style={{
+        maxWidth: 880, margin: '0 auto',
+        background: 'var(--room-50)',
+        border: '1px solid var(--border)',
+        borderRadius: 20,
+        overflow: 'hidden',
+        boxShadow: '0 20px 60px rgba(31,28,24,0.08)',
+      }}>
+        {/* Prijs-header met oker accent */}
+        <div style={{
+          background: 'var(--ink-900)',
+          padding: '56px 48px',
+          display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'center', gap: 32,
+          position: 'relative',
+        }}>
+          <div>
+            <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--oker-500)', marginBottom: 12 }}>
+              Prijs per maand
+            </div>
+            <div style={{ display: 'inline-flex', alignItems: 'baseline', gap: 12 }}>
+              <span className="ok-cont-b-price" style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 96, fontWeight: 700, lineHeight: 1,
+                color: 'var(--ink-900)',
+                background: 'var(--oker-500)',
+                padding: '6px 22px',
+                transform: 'skew(-2deg)',
+                display: 'inline-block',
+                letterSpacing: '-0.03em',
+              }}>
+                <span style={{ display: 'inline-block', transform: 'skew(2deg)' }}>€175</span>
+              </span>
+              <span style={{ fontSize: 18, color: 'var(--room-200)' }}>/ maand</span>
+            </div>
+            <div style={{ fontSize: 14, color: 'var(--room-200)', marginTop: 14 }}>
+              Incl. BTW · Maandelijkse SEPA incasso · Geen borg
+            </div>
+          </div>
+          <PillCTA variant="accent">Reserveer</PillCTA>
+        </div>
+
+        {/* Features grid */}
+        <div style={{
+          padding: '40px 48px',
+          display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20,
+        }}>
+          {[
+            { icon: 'squareM', k: '24 m²',        v: '10 × 2,4 meter zeecontainer' },
+            { icon: 'key',     k: 'Eigen slot',   v: 'Eigen sleutel, niemand anders erbij' },
+            { icon: 'clock',   k: '24/7 toegang', v: 'Kom wanneer je wil' },
+            { icon: 'shield',  k: 'Beveiligd',    v: 'Afgesloten, verlicht, cameratoezicht' },
+            { icon: 'calendar', k: 'Geen opzeg',  v: 'Zeg op wanneer je klaar bent' },
+            { icon: 'euro',    k: '€0 borg',      v: 'Gewoon je eerste maand' },
+          ].map((f) =>
+            <div key={f.k} style={{ display: 'grid', gridTemplateColumns: '44px 1fr', gap: 16, alignItems: 'start' }}>
+              <div style={{
+                width: 44, height: 44, borderRadius: 10,
+                background: 'var(--room-100)', color: 'var(--green-800)',
+                display: 'grid', placeItems: 'center',
+              }}>
+                <ContainerIcon name={f.icon} />
+              </div>
+              <div>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: 17, fontWeight: 700, color: 'var(--ink-900)', marginBottom: 2 }}>
+                  {f.k}
+                </div>
+                <div style={{ fontSize: 14, color: 'var(--fg-muted)', lineHeight: 1.5 }}>
+                  {f.v}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* C — magazine: container-foto als achtergrond, prijs-tag als overlay */
+function ContainerC() {
+  return (
+    <Section bg="raised" py={96}>
+      <div style={{
+        position: 'relative',
+        borderRadius: 20,
+        overflow: 'hidden',
+        minHeight: 540,
+        background: `
+          linear-gradient(105deg, rgba(31,28,24,0.86) 0%, rgba(31,28,24,0.70) 38%, rgba(31,28,24,0.2) 62%, rgba(31,28,24,0) 100%),
+          url(assets/containers-weiland.jpeg) center/cover no-repeat
+        `,
+        color: 'var(--room-50)',
+        padding: '72px 64px',
+      }}>
+        {/* Prijs-tag linksboven */}
+        <div style={{ position: 'absolute', top: 36, right: 36, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--oker-500)' }}>
+            Vanaf
+          </div>
+          <div style={{
+            background: 'var(--oker-500)', color: 'var(--ink-900)',
+            padding: '10px 20px', borderRadius: 6,
+            fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 36, lineHeight: 1,
+            letterSpacing: '-0.02em',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
+          }}>
+            €175<span style={{ fontSize: 16, fontWeight: 500 }}>/mnd</span>
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--room-200)', marginTop: 4 }}>Alles inbegrepen</div>
+        </div>
+
+        <div style={{ maxWidth: 560, display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <Eyebrow>De container</Eyebrow>
+          <h2 style={{
+            fontFamily: 'var(--font-display)', fontSize: 60, fontWeight: 700,
+            letterSpacing: '-0.03em', lineHeight: 1.02, margin: '0 0 20px',
+            color: 'var(--room-50)', textWrap: 'balance',
+          }}>
+            24 m².<br/>
+            <span style={{ color: 'var(--oker-500)' }}>Eén formaat.</span><br/>
+            Eén prijs.
+          </h2>
+          <p style={{ fontSize: 17, color: 'var(--room-200)', lineHeight: 1.6, margin: '0 0 36px', maxWidth: 460 }}>
+            10 meter bij 2,4 meter. Schoon, droog, afgesloten. Je krijgt je eigen slot.
+          </p>
+
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14,
+            marginBottom: 36, maxWidth: 480,
+          }}>
+            {[
+              ['10 × 2,4 m', 'Afmetingen'],
+              ['24 m²',       'Oppervlakte'],
+              ['€0 borg',     'Bij boeking'],
+              ['Geen opzeg',  'Loop vrij weg'],
+            ].map(([k, v]) =>
+              <div key={k} style={{
+                background: 'rgba(255,255,255,0.08)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                borderRadius: 10,
+                padding: '14px 16px',
+              }}>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--room-50)' }}>{k}</div>
+                <div style={{ fontSize: 12, color: 'var(--room-200)', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: 2 }}>{v}</div>
+              </div>
+            )}
+          </div>
+
+          <div>
+            <PillCTA variant="accent">Reserveer deze container</PillCTA>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* Compacte iconen voor ContainerB */
+function ContainerIcon({ name }) {
+  const common = { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' };
+  switch (name) {
+    case 'squareM':  return <svg {...common}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 16V8l2.5 4L12 8v8"/></svg>;
+    case 'key':      return <svg {...common}><circle cx="8" cy="15" r="3"/><path d="M10 13l10-10M17 5l2 2M15 7l2 2"/></svg>;
+    case 'clock':    return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>;
+    case 'shield':   return <svg {...common}><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6l8-3z"/></svg>;
+    case 'calendar': return <svg {...common}><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>;
+    case 'euro':     return <svg {...common}><path d="M4 10h12M4 14h9M19 6a7.7 7.7 0 00-5.2-2A7.9 7.9 0 006 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>;
+    default: return null;
+  }
+}
+
+function Row({ l, r }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--fg-muted)' }}>
+          <span>{l}</span><span style={{ color: 'var(--ink-900)', fontWeight: 500 }}>{r}</span>
+        </div>);
+
+}
+
+/* --------------------------------------------------------------------
+   WERKWIJZE — vier stappen, op donker groen
+   -------------------------------------------------------------------- */
+function Werkwijze() {
+  const steps = [
+  ['01', 'Reserveer online', 'Kies een container. 30 minuten bedenktijd.'],
+  ['02', 'Teken digitaal', 'Contract via DocuSeal. Niks te printen.'],
+  ['03', 'Betaal via iDEAL', 'Eerste maand. Daarna automatische incasso.'],
+  ['04', 'Haal je sleutel op', 'Kom langs. Of haal de code uit je mail.']];
+
+  return (
+    <section className="ok-werk" style={{
+      position: 'relative',
+      background: `
+        linear-gradient(100deg, rgba(31,28,24,0.92) 0%, rgba(31,28,24,0.75) 32%, rgba(31,28,24,0.2) 60%, rgba(31,28,24,0) 100%),
+        url(assets/containers-weiland.jpeg) center/cover no-repeat
+      `,
+      color: 'var(--room-50)',
+      padding: '96px 32px'
+    }}>
+      <div style={{ maxWidth: 1320, margin: '0 auto' }}>
+          <div className="ok-werk-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 72, rowGap: 32, alignItems: 'flex-start' }}>
+            <div className="ok-werk-text" style={{ gridColumn: '1', gridRow: '1', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--oker-500)', marginBottom: 16 }}>
+                Werkwijze
+              </div>
+              <DisplayH2 dark size={48}>
+                In vier <Highlight>stappen.</Highlight>
+              </DisplayH2>
+              <p style={{ fontSize: 17, color: 'var(--room-200)', margin: 0, maxWidth: 440, lineHeight: 1.6 }}>
+                Alles digitaal. Geen papier, geen balie, geen wachttijd. Je kunt vandaag nog terecht.
+              </p>
+            </div>
+            <div className="ok-werk-steps" style={{ gridColumn: '2', gridRow: '1 / span 2', display: 'grid', gap: 14 }}>
+              {steps.map(([n, t, d]) =>
+            <div key={n} style={{
+              display: 'grid', gridTemplateColumns: '56px 1fr', gap: 20,
+              padding: '22px 24px',
+              background: 'rgba(31,28,24,0.72)',
+              borderRadius: 8,
+              border: '1px solid rgba(201,169,97,0.18)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)'
+            }}>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--oker-500)', fontWeight: 700 }}>{n}</div>
+                  <div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 600, color: 'var(--room-50)', marginBottom: 4 }}>{t}</div>
+                    <div style={{ fontSize: 14, color: 'var(--room-200)' }}>{d}</div>
+                  </div>
+                </div>
+            )}
+            </div>
+            <div className="ok-werk-cta" style={{ gridColumn: '1', gridRow: '2' }}>
+              <PillCTA onDark>Bekijk de volledige werkwijze</PillCTA>
+            </div>
+          </div>
+      </div>
+    </section>);
+
+}
+
+/* --------------------------------------------------------------------
+   FAQ — eerlijk, kort, direct
+   -------------------------------------------------------------------- */
+function Faq() {
+  const items = [
+  ['Hoe snel kan ik een container krijgen?', 'Meestal dezelfde dag. Reserveer voor 16:00, en je kunt vandaag nog bij je container.'],
+  ['Is er stroom?', 'Nee. Onze containers zijn puur opslag — geen stopcontacten, geen verlichting binnen.'],
+  ['Mag ik mijn bedrijfsvoorraad er opslaan?', 'Ja. Veel zzp\'ers en ondernemers uit de regio gebruiken ons voor voorraad, materialen en archief.'],
+  ['Wat als ik er na een maand weer vanaf wil?', 'Dan zeg je op. Geen opzegtermijn, geen gedoe.']];
+
+  const [openIndex, setOpenIndex] = React.useState(0);
+
+  return (
+    <Section bg="room" py={96}>
+          <div className="ok-faq-grid" style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: 80 }}>
+            <div>
+              <Eyebrow>Veelgestelde vragen</Eyebrow>
+              <DisplayH2 size={44}>
+                De echte vragen die we <Highlight>krijgen.</Highlight>
+              </DisplayH2>
+              <p style={{ fontSize: 16, color: 'var(--fg-muted)', margin: 0, lineHeight: 1.6 }}>
+                Staat je vraag er niet bij? Bel ons gewoon. We zitten niet achter een chatbot.
+              </p>
+            </div>
+            <div style={{ display: 'grid', gap: 0 }}>
+              {items.map(([q, a], i) => (
+                <FaqItem 
+                  key={q} 
+                  q={q} 
+                  a={a} 
+                  isOpen={openIndex === i} 
+                  onToggle={() => setOpenIndex(openIndex === i ? -1 : i)} 
+                />
+              ))}
+            </div>
+          </div>
+        </Section>);
+
+}
+
+function FaqItem({ q, a, isOpen, onToggle }) {
+  return (
+    <div style={{ borderTop: '1px solid var(--border)', padding: '20px 0' }}>
+          <button onClick={onToggle} style={{
+        width: '100%', textAlign: 'left', background: 'none', border: 0, padding: 0, cursor: 'pointer',
+        fontFamily: 'var(--font-display)', fontSize: 19, fontWeight: 600, color: 'var(--ink-900)',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 24
+      }}>
+            <span>{q}</span>
+            <span className={'ok-faq__chev' + (isOpen ? ' ok-faq__chev--open' : '')} style={{
+          width: 28, height: 28, borderRadius: 14,
+          border: '1px solid var(--border)', display: 'grid', placeItems: 'center',
+          color: 'var(--ink-700)', flexShrink: 0
+        }}>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 9l6 6 6-6" /></svg>
+            </span>
+          </button>
+          <div className={'ok-faq__body' + (isOpen ? ' ok-faq__body--open' : '')} aria-hidden={!isOpen}>
+            <div>
+              <p style={{ margin: '14px 0 0', fontSize: 16, color: 'var(--fg-muted)', lineHeight: 1.65, maxWidth: 640 }}>{a}</p>
+            </div>
+          </div>
+        </div>);
+
+}
+
+/* --------------------------------------------------------------------
+   LOCATIE — met warm accent
+   -------------------------------------------------------------------- */
+function Locatie() {
+  return (
+    <Section bg="warm" py={96}>
+          <div style={{ height: 4, width: 48, background: 'var(--oker-600)', margin: '0 auto 32px' }} />
+          <div style={{ textAlign: 'center', marginBottom: 48, maxWidth: 640, margin: '0 auto 48px' }}>
+            <Eyebrow>Locatie</Eyebrow>
+            <DisplayH2 size={52}>
+              Tussen de weilanden, aan het <Highlight>Markermeer.</Highlight>
+            </DisplayH2>
+            <p className="lead" style={{ maxWidth: 560, margin: '0 auto' }}>
+              Lagedijk 9, 1145 PL Katwoude. Naast Hotel Katwoude, tussen Volendam en Monnickendam.
+            </p>
+          </div>
+          <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--room-100)' }}>
+            <KatwoudeMap />
+          </div>
+          <div className="ok-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 32 }}>
+            <LocItem k="Adres" v="Lagedijk 9, 1145 PL Katwoude" />
+            <LocItem k="Openingstijden terrein" v="24/7 toegang voor huurders" />
+            <LocItem k="Kantoor" v="Werkdagen 08:00 – 17:00" />
+          </div>
+        </Section>);
+
+}
+
+function LocItem({ k, v }) {
+  return (
+    <div style={{ padding: '20px 0', borderTop: '1px solid var(--border)' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--ink-500)', marginBottom: 8 }}>{k}</div>
+          <div style={{ fontSize: 17, color: 'var(--ink-900)', fontFamily: 'var(--font-display)', fontWeight: 600 }}>{v}</div>
+        </div>);
+
+}
+
+/* Echte kaart — Leaflet met OSM tiles, gecentreerd op Lagedijk 9 Katwoude.
+   Coordinaten 52.4598°N, 5.0618°E. De pin is een echte Leaflet marker, dus
+   blijft op locatie ook bij zoomen/pannen. */
+function KatwoudeMap() {
+  const ref = React.useRef(null);
+  const mapRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (!ref.current || mapRef.current) return;
+    if (typeof window.L === 'undefined') return;
+
+    const L = window.L;
+    const lat = 52.4598;
+    const lon = 5.0618;
+
+    const map = L.map(ref.current, {
+      center: [lat, lon],
+      zoom: 13,
+      zoomControl: true,
+      scrollWheelZoom: false,
+      attributionControl: true,
+    });
+    mapRef.current = map;
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(map);
+
+    /* Custom merk-pin — zwart met ocher dot, iets groter dan standaard */
+    const pinHtml = `
+      <div class="ok-pin-wrap">
+        <div class="ok-pin-glow"></div>
+        <svg width="40" height="52" viewBox="0 0 44 56" class="ok-pin-svg">
+          <path d="M22 2C11 2 4 10 4 20c0 13 14 26 18 32 4-6 18-19 18-32 0-10-7-18-18-18z" fill="#1F1C18"/>
+          <circle cx="22" cy="20" r="7" fill="#C9A961"/>
+        </svg>
+      </div>`;
+    const icon = L.divIcon({
+      html: pinHtml,
+      className: 'ok-pin-icon',
+      iconSize: [40, 52],
+      iconAnchor: [20, 50],
+      popupAnchor: [0, -48],
+    });
+
+    const marker = L.marker([lat, lon], { icon }).addTo(map);
+    marker.bindPopup(
+      `<div style="font-family:var(--font-display, DM Serif Display),serif;">
+         <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A7B48;margin-bottom:4px;font-weight:600;">Opslag Katwoude</div>
+         <div style="font-size:16px;font-weight:600;color:#1F1C18;line-height:1.1;">Lagedijk 9</div>
+         <div style="font-size:13px;color:#66615A;margin-top:2px;">1145 PL Katwoude</div>
+       </div>`,
+      { closeButton: false, offset: [0, -8] }
+    );
+
+    /* Activeer scroll-zoom wanneer kaart focus heeft */
+    map.on('click', () => map.scrollWheelZoom.enable());
+    map.on('mouseout', () => map.scrollWheelZoom.disable());
+
+    return () => { map.remove(); mapRef.current = null; };
+  }, []);
+
+  return (
+    <div className="ok-map" style={{ position: 'relative', width: '100%', aspectRatio: '16 / 8', background: '#F3EEDD', overflow: 'hidden' }}>
+      <div ref={ref} style={{ width: '100%', height: '100%' }} />
+
+      {/* Corner label linksboven */}
+      <div style={{
+        position: 'absolute', top: 16, left: 16, zIndex: 500,
+        background: 'var(--room-50)', border: '1px solid var(--border)',
+        padding: '6px 12px', borderRadius: 999,
+        fontSize: 11, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
+        color: 'var(--ink-700)',
+        boxShadow: '0 2px 8px rgba(31,28,24,0.08)',
+        pointerEvents: 'none',
+      }}>
+        Kaart · Katwoude
+      </div>
+
+      {/* Open in maps cta rechtsonder */}
+      <a
+        href="https://www.openstreetmap.org/?mlat=52.4598&mlon=5.0618#map=16/52.4598/5.0618"
+        target="_blank" rel="noreferrer"
+        style={{
+          position: 'absolute', bottom: 16, right: 16, zIndex: 500,
+          background: 'var(--ink-900)', color: 'var(--room-50)',
+          padding: '10px 16px', borderRadius: 999,
+          fontSize: 13, fontWeight: 600, textDecoration: 'none',
+          display: 'inline-flex', alignItems: 'center', gap: 8,
+          boxShadow: '0 6px 18px rgba(31,28,24,0.25)',
+        }}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M7 17L17 7M17 7H8M17 7v9" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        Open in kaart
+      </a>
+
+      <style>{`
+        .ok-pin-icon { background: transparent; border: 0; }
+        .ok-pin-wrap { position: relative; width: 40px; height: 52px; }
+        .ok-pin-svg {
+          position: relative; z-index: 2;
+          filter: drop-shadow(0 6px 10px rgba(31,28,24,0.35));
+        }
+        .ok-pin-glow {
+          position: absolute; left: 50%; top: 18px;
+          width: 80px; height: 80px; border-radius: 50%;
+          transform: translate(-50%, -50%);
+          background: radial-gradient(circle, rgba(201,169,97,0.55) 0%, rgba(201,169,97,0) 65%);
+          animation: okPulse 2.4s ease-in-out infinite;
+          z-index: 1; pointer-events: none;
+        }
+        @keyframes okPulse {
+          0%, 100% { transform: translate(-50%, -50%) scale(0.75); opacity: 0.7; }
+          50%      { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        }
+        .leaflet-popup-content-wrapper {
+          border-radius: 8px;
+          border-left: 4px solid #C9A961;
+          box-shadow: 0 10px 26px rgba(31,28,24,0.25);
+          padding: 10px 14px 12px;
+        }
+        .leaflet-popup-content { margin: 0; }
+        .leaflet-popup-tip { background: #FBF8F2; }
+        .leaflet-container { font-family: inherit; background: #E9E1CF; }
+      `}</style>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------------
+   CTA — laatste nudge
+   -------------------------------------------------------------------- */
+function CTA() {
+  return (
+    <Section bg="green" py={80}>
+          <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto' }}>
+            <DisplayH2 dark size={52}>
+              Klaar om te <Highlight>boeken?</Highlight>
+            </DisplayH2>
+            <p style={{ color: 'var(--room-200)', fontSize: 18, margin: '0 0 32px', lineHeight: 1.6 }}>
+              €175 per maand. Geen borg. Geen opzegtermijn.
+            </p>
+            <PillCTA onDark>Reserveer container</PillCTA>
+          </div>
+        </Section>);
+
+}
+
+/* --------------------------------------------------------------------
+   FOOTER
+   -------------------------------------------------------------------- */
+function Footer() {
+  const col = (title, links) =>
+  <div>
+          <div style={{
+      fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
+      color: 'var(--oker-500)', marginBottom: 14
+    }}>{title}</div>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8 }}>
+            {links.map((l) => <li key={l}><a href="#" style={{ color: 'var(--room-200)', fontSize: 14, textDecoration: 'none' }}>{l}</a></li>)}
+          </ul>
+        </div>;
+
+  return (
+    <footer className="ok-foot" style={{ background: 'var(--green-800)', color: 'var(--room-50)', padding: '64px 32px 28px' }}>
+          <div style={{ maxWidth: 1320, margin: '0 auto' }}>
+            <div className="ok-foot-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 64 }}>
+              <div>
+                <img src={LOGO_I} alt="" style={{ height: 57, marginBottom: 20 }} />
+                <p style={{ fontSize: 15, lineHeight: 1.65, color: 'var(--room-200)', maxWidth: 320, margin: 0 }}>
+                  Opslag naast Hotel Katwoude. Tussen de weilanden. 24 m². €175 per maand.
+                </p>
+              </div>
+              {col('Bezoek', ['Home', 'Werkwijze', 'Over ons', 'Contact', 'Blog'])}
+              {col('Juridisch', ['Voorwaarden', 'Privacy', 'Cookies'])}
+              {col('Locatie', ['Lagedijk 9', '1145 PL Katwoude', 'Route'])}
+            </div>
+            <div style={{
+          borderTop: '1px solid var(--green-700)', paddingTop: 24,
+          display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--room-300)'
+        }}>
+              <span>© 2026 Opslag Katwoude</span>
+              <span>KvK 12345678 · BTW NL001234567B01</span>
+            </div>
+          </div>
+        </footer>);
+
+}
+
+/* --------------------------------------------------------------------
+   SOCIAL PROOF — drie klantquotes + sterren
+   -------------------------------------------------------------------- */
+function SocialProof() {
+  const quotes = [
+    {
+      stars: 5,
+      text: "Dezelfde ochtend geregeld, ’s middags al m’n bouwmateriaal erin. Geen papierwinkel, gewoon een slot en een sleutel.",
+      name: 'Martijn K.',
+      role: 'Aannemer, Volendam',
+    },
+    {
+      stars: 5,
+      text: "Ik verhuisde vanuit Purmerend. Twee maanden nodig, geen langer contract. Dat kon nergens anders.",
+      name: 'Suzan de V.',
+      role: 'Particulier, Purmerend',
+    },
+    {
+      stars: 5,
+      text: "We slaan onze zomervoorraad hier op. Nuchtere mensen, duidelijke prijs, container altijd droog.",
+      name: 'Bas Ö.',
+      role: 'Horeca-ondernemer, Edam',
+    },
+  ];
+
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const mql = window.matchMedia('(max-width: 960px)');
+    setIsMobile(mql.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
+  React.useEffect(() => {
+    if (!isMobile) return;
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % quotes.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [quotes.length, isMobile]);
+
+  const renderCard = (q) => (
+    <div style={{
+      background: 'var(--room-50)',
+      border: '1px solid var(--border)',
+      borderRadius: 12,
+      padding: 32,
+      display: 'flex', flexDirection: 'column', gap: 20,
+      height: '100%',
+      maxWidth: isMobile ? 500 : 'none',
+      margin: '0 auto',
+      boxSizing: 'border-box'
+    }}>
+      <Stars value={q.stars} />
+      <p style={{
+        margin: 0, fontSize: 17, lineHeight: 1.55, color: 'var(--ink-900)',
+        fontFamily: 'var(--font-display)', fontWeight: 500,
+        textWrap: 'pretty',
+      }}>
+        “{q.text}”
+      </p>
+      <div style={{ marginTop: 'auto', paddingTop: 12, borderTop: '1px solid var(--border)' }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink-900)' }}>{q.name}</div>
+        <div style={{ fontSize: 13, color: 'var(--fg-muted)', marginTop: 2 }}>{q.role}</div>
+      </div>
+    </div>
+  );
+
+  return (
+    <Section bg="room" py={96}>
+      <div style={{ maxWidth: 720, margin: '0 auto 56px', textAlign: 'center' }}>
+        <Eyebrow>Wat huurders zeggen</Eyebrow>
+        <DisplayH2 size={44}>
+          400+ containers verhuurd. Niemand <Highlight>klaagt.</Highlight>
+        </DisplayH2>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 12 }}>
+          <Stars value={4.8} />
+          <span style={{ fontSize: 14, color: 'var(--fg-muted)' }}>
+            <strong style={{ color: 'var(--ink-900)', fontWeight: 600 }}>4,8</strong> uit 127 reviews op Google
+          </span>
+        </div>
+      </div>
+
+      {isMobile ? (
+        <>
+          <div style={{ position: 'relative', maxWidth: 800, margin: '0 auto', overflow: 'hidden' }}>
+            <div style={{
+              display: 'flex',
+              transition: 'transform 0.5s ease-in-out',
+              transform: `translateX(-${activeIndex * 100}%)`,
+            }}>
+              {quotes.map((q) =>
+                <div key={q.name} style={{
+                  flex: '0 0 100%',
+                  boxSizing: 'border-box',
+                  padding: '0 16px',
+                }}>
+                  {renderCard(q)}
+                </div>
+              )}
+            </div>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 32 }}>
+            {quotes.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                style={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: '50%',
+                  background: i === activeIndex ? 'var(--oker-500)' : 'var(--border)',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                  transition: 'background 0.3s ease',
+                }}
+                aria-label={`Ga naar review ${i + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="ok-sp-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+          {quotes.map((q) => (
+            <React.Fragment key={q.name}>
+              {renderCard(q)}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+    </Section>
+  );
+}
+
+function Stars({ value = 5, size = 16 }) {
+  const full = Math.floor(value);
+  const half = value - full >= 0.5;
+  const total = 5;
+  return (
+    <div style={{ display: 'inline-flex', gap: 2, color: 'var(--oker-600)' }}>
+      {Array.from({ length: total }).map((_, i) => {
+        const isFull = i < full;
+        const isHalf = i === full && half;
+        return (
+          <svg key={i} viewBox="0 0 24 24" width={size} height={size}>
+            <defs>
+              <linearGradient id={`starhalf-${i}`}>
+                <stop offset="50%" stopColor="currentColor" />
+                <stop offset="50%" stopColor="#E5DCC7" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              fill={isFull ? 'currentColor' : isHalf ? `url(#starhalf-${i})` : '#E5DCC7'}
+            />
+          </svg>
+        );
+      })}
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------------
+   PLATTEGROND — containers-overzicht, kleur = beschikbaar, grijs = bezet
+   -------------------------------------------------------------------- */
+function Plattegrond() {
+  /* 6 rijen × 10 containers = 60 — willekeurige verdeling */
+  const rows = 6;
+  const cols = 10;
+  /* Bepaalde ids zijn bezet (deterministic pattern) */
+  const taken = new Set([
+    2, 3, 7,
+    11, 14, 18,
+    22, 23, 26, 29,
+    33, 34, 35, 38,
+    41, 45, 46,
+    50, 53, 54, 58,
+  ]);
+  const totalBeschikbaar = rows * cols - taken.size;
+
+  const [selected, setSelected] = React.useState(null);
+
+  return (
+    <Section bg="raised" py={96}>
+      <div className="ok-plat-grid" style={{ display: 'grid', gridTemplateColumns: '360px 1fr', gap: 64, alignItems: 'stretch' }}>
+        <div className="ok-plat-left" style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="ok-plat-text">
+            <Eyebrow>Plattegrond</Eyebrow>
+            <DisplayH2 size={44}>
+              Zie direct welke container <Highlight>vrij</Highlight> is.
+            </DisplayH2>
+            <p style={{ fontSize: 17, color: 'var(--fg-muted)', margin: '0 0 28px', maxWidth: 340, lineHeight: 1.6 }}>
+              Elk blokje is een zeecontainer van 24 m². Groen is beschikbaar, grijs is bezet.
+              Klik een container om hem te reserveren.
+            </p>
+          </div>
+
+          <div className="ok-plat-legend" style={{ display: 'grid', gap: 12, marginBottom: 28 }}>
+            <LegendRow color="var(--green-800)" label="Beschikbaar" count={totalBeschikbaar} />
+            <LegendRow color="#C9C4B9" label="Bezet" count={taken.size} />
+            <LegendRow color="var(--oker-500)" label="Jouw keuze" count={selected !== null ? 1 : 0} />
+          </div>
+
+          <div className="ok-plat-cta" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            {selected !== null ?
+              <div style={{
+                background: 'var(--room-100)', border: '1px solid var(--oker-500)',
+                borderRadius: 10, padding: 20, marginBottom: 20,
+              }}>
+                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--oker-700)', marginBottom: 6 }}>
+                  Gekozen container
+                </div>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--ink-900)', letterSpacing: '-0.02em', marginBottom: 4 }}>
+                  KW-{String(selected + 1).padStart(3, '0')}
+                </div>
+                <div style={{ fontSize: 14, color: 'var(--fg-muted)' }}>
+                  24 m² · €175 / maand · vanaf morgen beschikbaar
+                </div>
+              </div>
+              :
+              <div style={{ fontSize: 14, color: 'var(--fg-subtle)', marginBottom: 20, fontStyle: 'italic' }}>
+                Geen container geselecteerd.
+              </div>
+            }
+
+            <div style={{ marginTop: 'auto' }}>
+              <PillCTA variant={selected !== null ? 'accent' : 'dark'}>
+                {selected !== null ? 'Reserveer deze container' : 'Kies een container'}
+              </PillCTA>
+            </div>
+          </div>
+        </div>
+
+        <div className="ok-plat-map" style={{
+          background: 'var(--room-100)',
+          border: '1px solid var(--border)',
+          borderRadius: 16,
+          padding: '48px 40px 36px',
+          position: 'relative',
+          display: 'flex', flexDirection: 'column',
+        }}>
+          {/* Ingang marker */}
+          <div style={{
+            position: 'absolute', top: -14, left: 48,
+            background: 'var(--ink-900)', color: 'var(--room-50)',
+            fontSize: 11, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
+            padding: '6px 12px', borderRadius: 999,
+            whiteSpace: 'nowrap',
+          }}>
+            → Ingang
+          </div>
+
+          {/* Compass rechts boven */}
+          <div style={{ position: 'absolute', top: 16, right: 20, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, color: 'var(--fg-subtle)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v3M12 18v3M3 12h3M18 12h3" strokeLinecap="round"/>
+              <path d="M12 7l2 5-2 5-2-5z" fill="currentColor" stroke="none"/>
+            </svg>
+            Noord
+          </div>
+
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: `repeat(${cols}, 1fr)`,
+              gap: 10,
+            }}>
+              {Array.from({ length: rows * cols }).map((_, i) => {
+                const isTaken = taken.has(i);
+                const isSelected = selected === i;
+                const row = Math.floor(i / cols);
+                const isMidGap = (row === 2); /* middelste rij = rijpad */
+                return (
+                  <button
+                    key={i}
+                    disabled={isTaken}
+                    onClick={() => setSelected(i)}
+                    title={`Container KW-${String(i + 1).padStart(3, '0')}`}
+                    style={{
+                      aspectRatio: '1 / 1.05',
+                      border: isSelected ? '2px solid var(--oker-500)' : '1px solid rgba(31,28,24,0.08)',
+                      background:
+                        isSelected ? 'var(--oker-500)' :
+                        isTaken    ? '#C9C4B9' :
+                                     'var(--green-800)',
+                      borderRadius: 5,
+                      cursor: isTaken ? 'not-allowed' : 'pointer',
+                      padding: 0,
+                      opacity: isTaken ? 0.55 : 1,
+                      marginBottom: isMidGap ? 26 : 0,
+                      boxShadow: isSelected ? '0 0 0 4px rgba(201,169,97,0.25)' : 'none',
+                      transition: 'transform 160ms ease, background 160ms, box-shadow 200ms',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      color: 'rgba(255,255,255,0.5)',
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 11, fontWeight: 600, letterSpacing: '0.04em',
+                    }}
+                    onMouseEnter={(e) => { if (!isTaken && !isSelected) e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
+                  >
+                    {/* subtiele container-richels */}
+                    <span style={{
+                      position: 'absolute', inset: '14% 10%',
+                      borderTop: isTaken ? '1px solid rgba(0,0,0,0.08)' : '1px solid rgba(255,255,255,0.08)',
+                      borderBottom: isTaken ? '1px solid rgba(0,0,0,0.08)' : '1px solid rgba(255,255,255,0.08)',
+                      pointerEvents: 'none',
+                    }} />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div style={{ marginTop: 32, display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--fg-subtle)', letterSpacing: '0.05em' }}>
+            <span>Lagedijk 9 · Katwoude</span>
+            <span>Bijgewerkt: vandaag 09:12</span>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function LegendRow({ color, label, count }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <span style={{ width: 24, height: 12, background: color, borderRadius: 2, flexShrink: 0 }} />
+      <span style={{ fontSize: 14, color: 'var(--ink-900)', flex: 1 }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, color: 'var(--ink-900)' }}>{count}</span>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------------
+   TWEAK PANEL — switcher voor propositie & container varianten
+   -------------------------------------------------------------------- */
+function TweakPanel({ tweaks, setTweaks, visible }) {
+  if (!visible) return null;
+  const update = (k, v) => {
+    const next = { ...tweaks, [k]: v };
+    setTweaks(next);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [k]: v } }, '*');
+  };
+
+  return (
+    <div className="ok-tweak-panel" style={{
+      position: 'fixed', bottom: 20, right: 20, zIndex: 1000,
+      width: 300,
+      background: 'var(--ink-900)', color: 'var(--room-50)',
+      borderRadius: 14, padding: 20,
+      fontFamily: 'var(--font-display)',
+      boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
+      border: '1px solid rgba(255,255,255,0.08)',
+    }}>
+      <div style={{
+        fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase',
+        color: 'var(--oker-500)', marginBottom: 16,
+      }}>
+        Tweaks
+      </div>
+
+      <TweakRow
+        label="Propositie-sectie"
+        value={tweaks.propositieVariant}
+        options={[
+          ['A', '4 koloms iconen'],
+          ['B', 'Groot genummerd'],
+          ['C', 'Asymmetrisch held'],
+        ]}
+        onChange={(v) => update('propositieVariant', v)}
+      />
+      <TweakRow
+        label="Container-kaart"
+        value={tweaks.containerVariant}
+        options={[
+          ['A', 'Prijskaart rechts'],
+          ['B', 'Prijs als highlight'],
+          ['C', 'Magazine foto'],
+        ]}
+        onChange={(v) => update('containerVariant', v)}
+      />
+    </div>
+  );
+}
+
+function TweakRow({ label, value, options, onChange }) {
+  return (
+    <div style={{ marginBottom: 16 }}>
+      <div style={{
+        fontSize: 12, fontWeight: 600, color: 'var(--room-200)',
+        marginBottom: 8, fontFamily: 'var(--font-body, DM Sans)',
+      }}>
+        {label}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>
+        {options.map(([val, name]) => {
+          const active = value === val;
+          return (
+            <button key={val} onClick={() => onChange(val)} style={{
+              padding: '8px 6px',
+              background: active ? 'var(--oker-500)' : 'rgba(255,255,255,0.06)',
+              color: active ? 'var(--ink-900)' : 'var(--room-200)',
+              border: 0, borderRadius: 8, cursor: 'pointer',
+              fontFamily: 'inherit', fontWeight: 600, fontSize: 11,
+              lineHeight: 1.3,
+              textAlign: 'center',
+            }}
+              title={name}
+            >
+              <div style={{ fontSize: 14, fontWeight: 700 }}>{val}</div>
+              <div style={{ fontSize: 10, opacity: 0.85, marginTop: 2 }}>{name}</div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------------
+   APP
+   -------------------------------------------------------------------- */
+function App() {
+  const [tweaks, setTweaks] = React.useState(TWEAK_DEFAULTS);
+  const [editMode, setEditMode] = React.useState(false);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const d = e.data;
+      if (!d || typeof d !== 'object') return;
+      if (d.type === '__activate_edit_mode')   setEditMode(true);
+      if (d.type === '__deactivate_edit_mode') setEditMode(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  return (
+    <TweakContext.Provider value={tweaks}>
+      <Header />
+      <Hero />
+      <Propositie />
+      <Container />
+      <Werkwijze />
+      <Plattegrond />
+      <SocialProof />
+      <Faq />
+      <Locatie />
+      <Footer />
+      <TweakPanel tweaks={tweaks} setTweaks={setTweaks} visible={editMode} />
+    </TweakContext.Provider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 0; background: var(--room-100); font-family: var(--font-sans); color: var(--ink-900); }
+  .card {
+    background: var(--green-800);
+    background-image:
+      radial-gradient(ellipse 120% 60% at 30% 100%, rgba(31,28,24,0.25), transparent 70%),
+      linear-gradient(180deg, rgba(46,63,42,0.75), rgba(46,63,42,0.95));
+    padding: 36px 40px 40px;
+    color: var(--room-50);
+    position: relative;
+    overflow: hidden;
+  }
+  .pill-nav {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(248,244,235,0.12); border: 1px solid rgba(248,244,235,0.18);
+    border-radius: 999px; padding: 6px; backdrop-filter: blur(12px);
+    margin-bottom: 28px;
+  }
+  .pill-nav a {
+    color: var(--room-50); font-size: 13px; font-weight: 500;
+    padding: 8px 14px; border-radius: 999px; text-decoration: none;
+  }
+  .pill-nav a.active { background: rgba(248,244,235,0.9); color: var(--ink-900); }
+
+  h1 {
+    font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em;
+    font-size: 44px; line-height: 1.05; margin: 0 0 16px; max-width: 520px;
+  }
+  .hl {
+    display: inline-block; background: var(--oker-500); color: var(--ink-900);
+    padding: 0 12px; transform: skew(-2deg);
+  }
+  .hl > span { display: inline-block; transform: skew(2deg); }
+
+  p.lead {
+    font-size: 14px; line-height: 1.55; color: var(--room-200);
+    max-width: 400px; margin: 0 0 24px;
+  }
+
+  .cta {
+    font-family: var(--font-sans); font-size: 14px; font-weight: 600; line-height: 1;
+    padding: 14px 18px 14px 22px; border-radius: 999px; border: 0; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink-900); color: var(--room-50);
+  }
+  .cta .dot {
+    width: 22px; height: 22px; border-radius: 999px;
+    background: var(--oker-600); color: var(--ink-900);
+    display: grid; place-items: center;
+  }
+
+  .tag {
+    position: absolute; bottom: 16px; right: 20px;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(248,244,235,0.55); font-weight: 600;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <nav class="pill-nav">
+      <a class="active" href="#">Home</a>
+      <a href="#">Werkwijze</a>
+      <a href="#">Contact</a>
+      <a href="#">Blog</a>
+    </nav>
+
+    <h1>Gewoon een container voor <span class="hl"><span>opslag.</span></span></h1>
+
+    <p class="lead">De huisstijl op één kaart: pill-navigatie, donkergroene basis, DM Sans kop met oker highlight op het signatuurwoord, zwart/oker pill-CTA.</p>
+
+    <button class="cta">
+      Reserveer container
+      <span class="dot"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </button>
+
+    <span class="tag">Huisstijl</span>
+  </div>
+</body>
+</html>

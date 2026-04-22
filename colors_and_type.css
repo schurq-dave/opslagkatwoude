@@ -73,7 +73,7 @@
   --border-inverse:var(--green-700);
 
   --accent:        var(--oker-600);
-  --accent-hover:  var(--oker-700);
+  --accent-hover:  var(--oker-600);
   --accent-fg:     var(--ink-900);  /* tekst op oker */
 
   --primary:       var(--green-800);
@@ -294,6 +294,6 @@ hr {
 }
 
 ::selection {
-  background: var(--oker-200);
+  background: var(--oker-600);
   color: var(--ink-900);
 }

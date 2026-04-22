@@ -232,7 +232,7 @@ function PillCTA({ children, onDark = false, small = false, variant = 'dark' }) 
 }
 
 /* Highlight: oker skew-block om één signatuurwoord in een kop te laten knallen. */
-function Highlight({ children, color = 'var(--oker-500)' }) {
+function Highlight({ children, color = 'var(--oker-600)' }) {
   return (
     <span style={{
       display: 'inline-block',
@@ -410,7 +410,7 @@ function Hero() {
         <div style={{ maxWidth: 640 }}>
           <div className="ok-hero-eyebrow" style={{
             fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
-            color: 'var(--oker-500)', marginBottom: 20,
+            color: 'var(--oker-600)', marginBottom: 20,
           }}>Katwoude · Lagedijk 9</div>
 
           <h1 style={{
@@ -563,7 +563,7 @@ function PropositieC({ items }) {
           minHeight: 420,
         }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--oker-500)', marginBottom: 28 }}>
+            <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--oker-600)', marginBottom: 28 }}>
               Reden #1
             </div>
             <div style={{
@@ -573,7 +573,7 @@ function PropositieC({ items }) {
               lineHeight: 0.95, color: 'var(--room-50)',
               marginBottom: 24,
             }}>
-              €175<span style={{ color: 'var(--oker-500)' }}>.</span>
+              €175<span style={{ color: 'var(--oker-600)' }}>.</span>
             </div>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: 26, fontWeight: 600, marginBottom: 10 }}>
               Per maand. Alles inbegrepen.
@@ -584,15 +584,15 @@ function PropositieC({ items }) {
           </div>
           <div style={{ display: 'flex', gap: 24, marginTop: 40, paddingTop: 24, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
             <div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--oker-500)' }}>24 m²</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--oker-600)' }}>24 m²</div>
               <div style={{ fontSize: 13, color: 'var(--room-200)' }}>per container</div>
             </div>
             <div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--oker-500)' }}>€0</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--oker-600)' }}>€0</div>
               <div style={{ fontSize: 13, color: 'var(--room-200)' }}>borg</div>
             </div>
             <div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--oker-500)' }}>0 dagen</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--oker-600)' }}>0 dagen</div>
               <div style={{ fontSize: 13, color: 'var(--room-200)' }}>opzegtermijn</div>
             </div>
           </div>
@@ -738,7 +738,7 @@ function ContainerB() {
           position: 'relative',
         }}>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--oker-500)', marginBottom: 12 }}>
+            <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--oker-600)', marginBottom: 12 }}>
               Prijs per maand
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'baseline', gap: 12 }}>
@@ -746,7 +746,7 @@ function ContainerB() {
                 fontFamily: 'var(--font-display)',
                 fontSize: 96, fontWeight: 700, lineHeight: 1,
                 color: 'var(--ink-900)',
-                background: 'var(--oker-500)',
+                background: 'var(--oker-600)',
                 padding: '6px 22px',
                 transform: 'skew(-2deg)',
                 display: 'inline-block',
@@ -818,11 +818,11 @@ function ContainerC() {
       }}>
         {/* Prijs-tag linksboven */}
         <div style={{ position: 'absolute', top: 36, right: 36, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--oker-500)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--oker-600)' }}>
             Vanaf
           </div>
           <div style={{
-            background: 'var(--oker-500)', color: 'var(--ink-900)',
+            background: 'var(--oker-600)', color: 'var(--ink-900)',
             padding: '10px 20px', borderRadius: 6,
             fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 36, lineHeight: 1,
             letterSpacing: '-0.02em',
@@ -841,7 +841,7 @@ function ContainerC() {
             color: 'var(--room-50)', textWrap: 'balance',
           }}>
             24 m².<br/>
-            <span style={{ color: 'var(--oker-500)' }}>Eén formaat.</span><br/>
+            <span style={{ color: 'var(--oker-600)' }}>Eén formaat.</span><br/>
             Eén prijs.
           </h2>
           <p style={{ fontSize: 17, color: 'var(--room-200)', lineHeight: 1.6, margin: '0 0 36px', maxWidth: 460 }}>
@@ -926,7 +926,7 @@ function Werkwijze() {
       <div style={{ maxWidth: 1320, margin: '0 auto' }}>
           <div className="ok-werk-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 72, rowGap: 32, alignItems: 'flex-start' }}>
             <div className="ok-werk-text" style={{ gridColumn: '1', gridRow: '1', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--oker-500)', marginBottom: 16 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--oker-600)', marginBottom: 16 }}>
                 Werkwijze
               </div>
               <DisplayH2 dark size={48}>
@@ -947,7 +947,7 @@ function Werkwijze() {
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)'
             }}>
-                  <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--oker-500)', fontWeight: 700 }}>{n}</div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--oker-600)', fontWeight: 700 }}>{n}</div>
                   <div>
                     <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 600, color: 'var(--room-50)', marginBottom: 4 }}>{t}</div>
                     <div style={{ fontSize: 14, color: 'var(--room-200)' }}>{d}</div>
@@ -1225,7 +1225,7 @@ function Footer() {
   <div>
           <div style={{
       fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
-      color: 'var(--oker-500)', marginBottom: 14
+      color: 'var(--oker-600)', marginBottom: 14
     }}>{title}</div>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8 }}>
             {links.map((l) => <li key={l}><a href="#" style={{ color: 'var(--room-200)', fontSize: 14, textDecoration: 'none' }}>{l}</a></li>)}
@@ -1372,7 +1372,7 @@ function SocialProof() {
                   width: 10,
                   height: 10,
                   borderRadius: '50%',
-                  background: i === activeIndex ? 'var(--oker-500)' : 'var(--border)',
+                  background: i === activeIndex ? 'var(--oker-600)' : 'var(--border)',
                   border: 'none',
                   padding: 0,
                   cursor: 'pointer',
@@ -1462,16 +1462,16 @@ function Plattegrond() {
           <div className="ok-plat-legend" style={{ display: 'grid', gap: 12, marginBottom: 28 }}>
             <LegendRow color="var(--green-800)" label="Beschikbaar" count={totalBeschikbaar} />
             <LegendRow color="#C9C4B9" label="Bezet" count={taken.size} />
-            <LegendRow color="var(--oker-500)" label="Jouw keuze" count={selected !== null ? 1 : 0} />
+            <LegendRow color="var(--oker-600)" label="Jouw keuze" count={selected !== null ? 1 : 0} />
           </div>
 
           <div className="ok-plat-cta" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
             {selected !== null ?
               <div style={{
-                background: 'var(--room-100)', border: '1px solid var(--oker-500)',
+                background: 'var(--room-100)', border: '1px solid var(--oker-600)',
                 borderRadius: 10, padding: 20, marginBottom: 20,
               }}>
-                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--oker-700)', marginBottom: 6 }}>
+                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--oker-600)', marginBottom: 6 }}>
                   Gekozen container
                 </div>
                 <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700, color: 'var(--ink-900)', letterSpacing: '-0.02em', marginBottom: 4 }}>
@@ -1543,9 +1543,9 @@ function Plattegrond() {
                     title={`Container KW-${String(i + 1).padStart(3, '0')}`}
                     style={{
                       aspectRatio: '1 / 1.05',
-                      border: isSelected ? '2px solid var(--oker-500)' : '1px solid rgba(31,28,24,0.08)',
+                      border: isSelected ? '2px solid var(--oker-600)' : '1px solid rgba(31,28,24,0.08)',
                       background:
-                        isSelected ? 'var(--oker-500)' :
+                        isSelected ? 'var(--oker-600)' :
                         isTaken    ? '#C9C4B9' :
                                      'var(--green-800)',
                       borderRadius: 5,
@@ -1620,7 +1620,7 @@ function TweakPanel({ tweaks, setTweaks, visible }) {
     }}>
       <div style={{
         fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase',
-        color: 'var(--oker-500)', marginBottom: 16,
+        color: 'var(--oker-600)', marginBottom: 16,
       }}>
         Tweaks
       </div>
@@ -1664,7 +1664,7 @@ function TweakRow({ label, value, options, onChange }) {
           return (
             <button key={val} onClick={() => onChange(val)} style={{
               padding: '8px 6px',
-              background: active ? 'var(--oker-500)' : 'rgba(255,255,255,0.06)',
+              background: active ? 'var(--oker-600)' : 'rgba(255,255,255,0.06)',
               color: active ? 'var(--ink-900)' : 'var(--room-200)',
               border: 0, borderRadius: 8, cursor: 'pointer',
               fontFamily: 'inherit', fontWeight: 600, fontSize: 11,

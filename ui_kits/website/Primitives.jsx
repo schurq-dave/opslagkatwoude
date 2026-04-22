@@ -18,7 +18,7 @@ function Button({variant='primary', size='md', children, onClick, ...props}) {
   };
   const hover = {
     primary: 'var(--green-900)',
-    accent:  'var(--oker-700)',
+    accent:  'var(--oker-600)',
     ghost:   'transparent',
   };
   const [h, setH] = React.useState(false);
